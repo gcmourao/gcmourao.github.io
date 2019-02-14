@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Gabriela Mourao">
+<meta name="keywords" content="tech">
+<meta name="description" content="The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:">
+
+
+<meta property="og:description" content="The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introductory Tutorial on Rmarkdown">
+<meta name="twitter:title" content="Introductory Tutorial on Rmarkdown">
+<meta property="og:url" content="/2019/02/introductory-tutorial-on-rmarkdown/">
+<meta property="twitter:url" content="/2019/02/introductory-tutorial-on-rmarkdown/">
+<meta property="og:site_name" content="Gabriela Mourao">
+<meta property="og:description" content="The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:">
+<meta name="twitter:description" content="The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-02-14T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-02-14T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="Tutorial">
+    
+  
+  
+    
+      <meta property="article:tag" content="R Markdown">
+    
+      <meta property="article:tag" content="R">
+    
+      <meta property="article:tag" content="tutorial">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+
+
+    <title>Introductory Tutorial on Rmarkdown</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/02/introductory-tutorial-on-rmarkdown/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Gabriela Mourao</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Gabriela Mourao</h4>
+        
+          <h5 class="sidebar-profile-bio">Economist, Data Scientist, passionate about innovation</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/gcmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/gabriela-consuelo-mourao-a603757b/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/gabrielacmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Introductory Tutorial on Rmarkdown
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-02-14T00:00:00Z">
+        
+  February 14, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/tutorial">Tutorial</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+<link href="2019-02-14-introductory-tutorial-on-rmarkdown_files/font-awesome/css/all.css" rel="stylesheet" />
+<link href="2019-02-14-introductory-tutorial-on-rmarkdown_files/font-awesome/css/v4-shims.css" rel="stylesheet" />
+
+
+<p><br> The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: <a href="https://bookdown.org/yihui/rmarkdown/installation.html" class="uri">https://bookdown.org/yihui/rmarkdown/installation.html</a> <br></p>
+<div id="text-formatation" class="section level1">
+<h1>Text Formatation</h1>
+<div id="basic-formatation" class="section level2">
+<h2>Basic Formatation</h2>
+<p><strong>a. Manual line Break</strong></p>
+<p>To add a line break, you can type two or more spaces in the end of the line, just like that:<br />
+<em>this is a new line</em></p>
+<p><strong>b.Headers type</strong></p>
+<pre><code># Header 1
+## Header 2
+### Header 3
+</code></pre>
+<p><strong>c.Text Emphasis</strong></p>
+<p><em>- Italic Format</em><br />
+<strong>- Bold Format</strong><br />
+- Subscript<sub>1</sub><br />
+- Superscript<sup>1</sup></p>
+<pre><code>*Italic* or _italic_
+**Bold** or __Bold__
+Subscript~1~
+Superscript^1^</code></pre>
+</div>
+<div id="lists" class="section level2">
+<h2>Lists</h2>
+<p><strong>a. Ordered list</strong></p>
+<pre><code>1. First Element
+2. Second Element
+      + Nested Element
+      + Another Nested Element</code></pre>
+<p><strong>b. Unordered list</strong></p>
+<pre><code>* Text 
+* Another text
+      + Nested text
+- Other option for list
+      + Again nested text
+</code></pre>
+<hr />
+</div>
+<div id="page-break" class="section level2">
+<h2>Page Break</h2>
+<p>To add a page break, as the example above, you can simply type four or more dashes or asteristics:</p>
+<pre><code>------ or 
+******
+</code></pre>
+</div>
+<div id="blockquotes" class="section level2">
+<h2>Blockquotes</h2>
+<p><strong>a. Plain Code Block </strong></p>
+<p>Since the beggining of this session I am using this option to show how to apply each of the formattings introduced up to now. With them it is possible to write some code in a fixed-width box, but not evaulating it:</p>
+<pre><code>      ```
+      This text is displayed as it is **typed!** 
+      ```</code></pre>
+<p><strong>b. Blockquotes</strong></p>
+<p>Can be used to add some quotes in your markdown file, as in the following example.</p>
+<blockquote>
+<p>“No medicine cures what happiness cannot”</p>
+<p><em>Gabriel Garcia Marques</em><br />
+:)</p>
+</blockquote>
+<pre><code>&gt; No medicine cures what happiness cannot  
+&gt; *Gabriel Garcia Marques*  
+&gt; :)
+</code></pre>
+<hr />
+</div>
+</div>
+<div id="output-formats" class="section level1">
+<h1>Output formats</h1>
+<p>There are several outputs formats available in Markdown:</p>
+<ul>
+<li>beamer_presentation<br />
+</li>
+<li>github_document<br />
+</li>
+<li>html_document<br />
+</li>
+<li>ioslides_presentation<br />
+</li>
+<li>latex_document<br />
+</li>
+<li>md_document<br />
+</li>
+<li>odt_document<br />
+</li>
+<li>pdf_document<br />
+</li>
+<li>powerpoint_presentation<br />
+</li>
+<li>rtf_document<br />
+</li>
+<li>slidy_presentation<br />
+</li>
+<li>word_document</li>
+</ul>
+<p>Up to now, this tutorial have been focusing on markdown syntax in a more broadly way, But now, lets focus on some options for <strong>html_document</strong> output.<br />
+If you type ?rmarkdown::html_document in your R console, you can get a list of all options for HTML document. The ones that I use most are described below:</p>
+<ul>
+<li><strong>code_folding:</strong> Enable document readers to toggle the display of R code chunks. Specify “none” to display all code chunks (assuming they were knit with echo = TRUE). Specify “hide” to hide all R code chunks by default (users can show hidden code chunks either individually or document-wide). Specify “show” to show all R code chunks by default.<br />
+</li>
+<li><strong>toc:</strong> to include a table of contents in the output<br />
+</li>
+<li><strong>toc_depth:</strong> Depth of headers to include in table format<br />
+</li>
+<li><strong>toc_float:</strong> TRUE to float the table of contents<br />
+</li>
+<li><strong>Code_download:</strong> Embeded the Rmd source code within the document and provide a link that can be used by readers to download the code.<br />
+</li>
+<li><strong>number_sections:</strong> TRUE to number section headings</li>
+<li><strong>self_conteained:</strong> Produce a standalone HTML file with no external dependencies.</li>
+</ul>
+<div id="usage-examples" class="section level2">
+<h2>Usage examples:</h2>
+<p>Following you can find some usage examples of the mentioned options:</p>
+<pre><code>      html_document:
+            code_folding: show
+            toc: yes
+            toc_depth: 1
+            toc_float: yes
+            code_download: yes
+            highlight: haddock
+            theme: lumen</code></pre>
+<p><img src="img/output1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="section" class="section level2">
+<h2><br></h2>
+<p>Including section number:</p>
+<pre><code>output: 
+      html_document:
+            code_folding: show
+            toc: yes
+            toc_depth: 2
+            toc_float: yes
+            code_download: yes
+            number_sections: true
+            highlight: haddock
+            theme: lumen
+</code></pre>
+<p><img src="C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/output2.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<hr />
+<p><br> Flatly theme:</p>
+<p><img src="C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/flatly.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<hr />
+<p>Journal theme:</p>
+<p><img src="C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/journal_and_haddock.png" width="80%" style="display: block; margin: auto;" /></p>
+<hr />
+<p>Lumen theme:</p>
+<p><img src="C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/lumen.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<hr />
+</div>
+</div>
+<div id="code" class="section level1">
+<h1>Code</h1>
+<div id="echo-options" class="section level2">
+<h2>Echo Options</h2>
+<p>To insert some codes in the markdown document, the called code chunk, it is necessary to add three backticks like ??? followed by {r}, where r indicates the language name. To close the code chunk, add another three backticks in the end. You can write chunk options in the curly braces, as we are going to see in the following examples.</p>
+<pre class="r"><code>summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<p>Another easier way to add a R code chunk is simply type: “ctrl + alt + i”. It is possible to control the code output adding some chunk options inside the curly braces: {r }.<br />
+Following, some very useful options that I use very frequently:</p>
+<ul>
+<li><strong>eval:</strong> TRUE to evaluate the code chunk<br />
+</li>
+<li><strong>echo:</strong> TRUE to show the code in the output document<br />
+</li>
+<li><strong>results:</strong> If “hide” the text output will be hidden, “asis” for write a text as is.<br />
+</li>
+<li><strong>collapse:</strong> TRUE to merge output text and the code into a single code block in the output.<br />
+</li>
+<li><strong>Warning, message and error:</strong> Whether to show warnings, messages and error in the output document</li>
+<li><strong>include:</strong> When include = FALSE, the whole code chunk is excluded in the output, but note that it will still be evaluated if eval = TRUE.<br />
+</li>
+<li><strong>cache:</strong> If caching is enabled, the same code chunk will not be evaluated the next time the document is compiled (if the code chunk was not modified), which can save you time.<br />
+</li>
+<li><strong>fig.width and fig.height:</strong> The (graphical device) size of R plots in inches. Ex: fig.width = 6 and fig.height = 4 or fig.dim = c(6, 4).<br />
+</li>
+<li><strong>out.width and out.height:</strong> The output size of R plots in the output document. These options may scale images. You can use percentages, e.g., out.width = ‘80%’ means 80% of the page width.<br />
+</li>
+<li><strong>fig.align:</strong> The alignment of plots. It can be ‘left’, ‘center’, or ‘right’.<br />
+</li>
+<li><strong>fig.cap: </strong> To include some figure caption.</li>
+</ul>
+<p>For a better understanding of how these options work, we can see some examples below:</p>
+<ol style="list-style-type: decimal">
+<li><strong>{r, include = FALSE}</strong>
+<ul>
+<li>Code not shown<br />
+</li>
+<li>results not shown<br />
+</li>
+</ul></li>
+<li><strong>{r, echo = FALSE}</strong>
+<ul>
+<li>Code not shown</li>
+<li>results shown</li>
+</ul></li>
+</ol>
+<pre><code>##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>{r, results = ‘hide’}</strong>
+<ul>
+<li>Code shown<br />
+</li>
+<li>Results not shown</li>
+</ul></li>
+</ol>
+<pre class="r"><code>summary(cars)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>{r, collapse=TRUE}</strong>
+<ul>
+<li>To merge the code and the output</li>
+</ul></li>
+</ol>
+<pre class="r"><code>summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>{r, out.width=‘30%’, fig.align=‘center’, fig.cap=‘Amazing Hong Kong’}</strong>
+<ul>
+<li>Another option for including images and captions.</li>
+</ul></li>
+</ol>
+<pre class="r"><code>
+#knitr::include_graphics(&#39;C:/Users/gabriela.mourao/Documents/6-PESSOAL/timon-studler-49992-u#nsplash.jpg&#39;)
+</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>{r, fig.align=‘center’, fig.width = 6, fig.height=4}</strong>
+<ul>
+<li>It is possible to adjust the graph size as well its alignment in the output document</li>
+</ul></li>
+</ol>
+<pre class="r"><code>
+ggplot(cars, aes(x=speed, y=dist)) +
+      geom_point(alpha=1) + 
+      labs(title = &quot;Speed vs. Distance&quot;, x = &quot;Speed&quot;, y = &quot;Distance&quot;) + 
+      theme_bw()</code></pre>
+<p><img src="2019-02-14-introductory-tutorial-on-rmarkdown_files/figure-html/unnamed-chunk-14-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>There are many options available for control the Code Chunk output, if you want more information about it in the following links you can find good references:<br />
+<a href="https://yihui.name/knitr/options/" class="uri">https://yihui.name/knitr/options/</a><br />
+<a href="https://bookdown.org/yihui/rmarkdown/r-code.html" class="uri">https://bookdown.org/yihui/rmarkdown/r-code.html</a><br />
+<a href="https://www.overleaf.com/learn/latex/Positioning_images_and_tables" class="uri">https://www.overleaf.com/learn/latex/Positioning_images_and_tables</a></p>
+</div>
+<div id="inline-code" class="section level2">
+<h2>Inline Code</h2>
+<p>If one wants to add just a small code expression in the markdown text, it is necessary to add one backticks like in the example below:</p>
+<p>For example:<br />
+- The total speed in Cars dataset is 770<br />
+- The total distance in Cars dataset is 2149</p>
+<p><img src="C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/Inline_code.png" width="80%" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+</div>
+<div id="formulas" class="section level1">
+<h1>Formulas</h1>
+<div id="inline-and-display-mode" class="section level2">
+<h2>Inline and display mode</h2>
+<p>If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: “This is an inline example formula: <span class="math display">\[E=mc^2\]</span>”</p>
+<pre><code>      &quot;This is an inline example formula: $E=mc^2$&quot;
+</code></pre>
+<p>But, if you are typing a very long expression, you might think that is better to use the display mode: <span class="math display">\[a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})\]</span></p>
+<pre><code>   $$a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})$$
+</code></pre>
+</div>
+<div id="symbols" class="section level2">
+<h2>Symbols:</h2>
+<p>Some useful symbol formatations:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Symbol</th>
+<th align="center">Latex</th>
+<th align="center">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\pm\)</span></td>
+<td align="center"><code>\pm</code></td>
+<td align="center">plus or minus</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\div\)</span></td>
+<td align="center"><code>\div</code></td>
+<td align="center">divided by</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\times\)</span></td>
+<td align="center"><code>\times</code></td>
+<td align="center">times</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\ge\)</span></td>
+<td align="center"><code>\ge</code></td>
+<td align="center">greater or equal</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\le\)</span></td>
+<td align="center"><code>\le</code></td>
+<td align="center">less or equal</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\forall\)</span></td>
+<td align="center"><code>\forall</code></td>
+<td align="center">For all</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\ne\)</span></td>
+<td align="center"><code>\ne</code></td>
+<td align="center">Not equal</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\sim\)</span></td>
+<td align="center"><code>\sim</code></td>
+<td align="center">is similar to</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\in\)</span></td>
+<td align="center"><code>\in</code></td>
+<td align="center">is member of</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\mathbb{R}\)</span></td>
+<td align="center"><code>\mathbb{R}</code></td>
+<td align="center">Set of real numbers</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\hat{y}\)</span></td>
+<td align="center"><code>\hat{y}</code></td>
+<td align="center">y hat</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\bar{y}\)</span></td>
+<td align="center"><code>\bar{y}</code></td>
+<td align="center">y bar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="greek-letters" class="section level2">
+<h2>Greek Letters</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Symbol</th>
+<th align="center">Latex</th>
+<th align="center">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\alpha\)</span></td>
+<td align="center"><code>\alpha</code></td>
+<td align="center">alpha</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\beta\)</span></td>
+<td align="center"><code>\beta</code></td>
+<td align="center">beta</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\Delta~and~\delta\)</span></td>
+<td align="center"><code>\Delta and \delta</code></td>
+<td align="center">Delta</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\epsilon~and~\varepsilon\)</span></td>
+<td align="center"><code>\epsilon and \varepsilon</code></td>
+<td align="center">epsilon</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\Gamma~and~\gamma\)</span></td>
+<td align="center"><code>\Gamma and \gamma</code></td>
+<td align="center">Gamma</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\pi\)</span></td>
+<td align="center"><code>\pi</code></td>
+<td align="center">pi</td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\Sigma~\sigma~\varsigma\)</span></td>
+<td align="center"><code>\Sigma \sigma \varsigma</code></td>
+<td align="center">Sigma</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="index" class="section level2">
+<h2>Index</h2>
+<p><span class="math display">\[
+\begin{align}
+x_i, x_{i} &amp;&amp; \text{(Subscript)}\\
+x^2 &amp;&amp; \text{(Superscript)}\\
+x^2_i,~x^2_{i,j} &amp;&amp; \text{(Combined)}\  
+\end{align}
+\]</span></p>
+<pre><code>x_i, x_{i} (Subscript)
+x^2 (Superscript)
+x^2_i, x^2_{i,j} (Combined)  
+</code></pre>
+</div>
+<div id="expressions" class="section level2">
+<h2>Expressions</h2>
+<div id="square-roots" class="section level3">
+<h3>Square roots</h3>
+<p>To indicate a square root, use <code>\sqrt</code>: <span class="math inline">\(\sqrt{x}\)</span></p>
+<pre><code>$\sqrt{x}$
+</code></pre>
+</div>
+<div id="fractions" class="section level3">
+<h3>Fractions</h3>
+<p>The fractions are displayed using <code>\frac</code> symbol:<br><br />
+<span class="math inline">\(x=\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}\)</span><br><br />
+or adding a parantesis:<br><br />
+<span class="math inline">\(x=\left(\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}\right)\)</span><br></p>
+<pre><code>$x=\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}$   
+
+$x=\left(\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}\right)$
+</code></pre>
+</div>
+<div id="summation-expression" class="section level3">
+<h3>Summation expression</h3>
+<p>To add a summation sign, you can use <code>\sum</code> and combine it with the index syntax introduced above: <span class="math inline">\(\sum_{i=1}^n(y_i-\hat{y})^2\)</span></p>
+<pre><code>$\sum_{i=1}^n(y_i-\hat{y})^2$
+</code></pre>
+</div>
+<div id="others" class="section level3">
+<h3>Others</h3>
+<p><span class="math display">\[\int_0^{a} x^k~dx\]</span></p>
+<pre><code>$$\int_0^{a} x^k~dx$$
+</code></pre>
+<p><span class="math display">\[ \frac{\partial u}{\partial t}
+   = h^2 \left( \frac{\partial^2 u}{\partial x^2}
+      + \frac{\partial^2 u}{\partial y^2}
+      + \frac{\partial^2 u}{\partial z^2} \right) \]</span></p>
+<pre><code>$$ \frac{\partial u}{\partial t}
+   = h^2 \left( \frac{\partial^2 u}{\partial x^2}
+      + \frac{\partial^2 u}{\partial y^2}
+      + \frac{\partial^2 u}{\partial z^2} \right) $$</code></pre>
+<p><span class="math display">\[\lim_{x \to +\infty} \frac{3x^2 +7x^3}{x^2 +5x^4} = 3\]</span></p>
+<pre><code>$$\lim_{x \to +\infty} \frac{3x^2 +7x^3}{x^2 +5x^4} = 3$$</code></pre>
+</div>
+</div>
+<div id="matrices" class="section level2">
+<h2>Matrices</h2>
+<p><span class="math display">\[\mathbf{X} = \left[\begin{array}
+{rrr}
+2 &amp; 4 &amp; 6 \\
+8 &amp; 10 &amp; 12 \\
+14 &amp; 16 &amp; 18
+\end{array}\right]\]</span></p>
+<pre><code>$$\mathbf{X} = \left[\begin{array}
+{rrr}
+2 &amp; 4 &amp; 6 \\
+8 &amp; 10 &amp; 12 \\
+14 &amp; 16 &amp; 18
+\end{array}\right]$$
+</code></pre>
+<p>For operations with matrix you can also use <span class="math inline">\(\mathbf{y}=\mathbf{X}\beta\)</span>, for example.</p>
+<pre><code>$\mathbf{y}=\mathbf{X}\beta$
+</code></pre>
+</div>
+<div id="alignment-and-comments" class="section level2">
+<h2>Alignment and comments:</h2>
+<p>You can use “~” to add some spaces in the formula: <span class="math display">\[ x_{i} + y_{i} \ge 0 ~~~~~~~\forall~i \in \mathbb{R} \]</span></p>
+<pre><code>$$ x_{i} + y_{i} \ge 0 ~~~~~~~\forall~i \in \mathbb{R} $$
+</code></pre>
+<p>The formula inserted in “index” topic, wasn’t completely shown at that time. To write formulas together with comments, is necessary to use the following syntax:</p>
+<pre><code>$$
+\begin{align}
+x_i, x_{i} &amp;&amp; \text{(Subscript)}\\
+x^2 &amp;&amp; \text{(Superscript)}\\
+x^2_i,~x^2_{i,j} &amp;&amp; \text{(Combined)}\  
+\end{align}
+$$
+</code></pre>
+<p>Besides that, when solving large expressions, might be useful to use some alignment:</p>
+<p><span class="math display">\[\begin{align}
+      5\times a~+~10 &amp;=30 \\
+      5\times a &amp;= 20 \\
+      a &amp;= 4
+\end{align}\]</span></p>
+<pre><code>$$\begin
+      5\times a~+~10 &amp;=30 \\
+      5\times a &amp;= 20 \\
+      a &amp;= 4
+\end$$
+</code></pre>
+<hr />
+</div>
+</div>
+<div id="links" class="section level1">
+<h1>Links</h1>
+<p>To insert hyperlinks, you can type: <a href="https://www.rstudio.com">R-studio</a> or <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a></p>
+<pre><code>
+[R-studio](https://www.rstudio.com)      
+or     
+https://www.rstudio.com   
+
+</code></pre>
+<hr />
+</div>
+<div id="images" class="section level1">
+<h1>Images</h1>
+<p>For images, the syntax is very similar to links:</p>
+<p>nn</p>
+<pre><code>
+![The amazing Hong Kong](C:/Users/gabriela.mourao/Documents/6-PESSOAL/timon-studler-49992-unsplash.jpg)^[photo by timon studler on unsplash]  
+
+</code></pre>
+<hr />
+</div>
+<div id="tables" class="section level1">
+<h1>Tables</h1>
+<p>Inserting manual tables in Rmarkdown is very easy:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Number Section</th>
+<th align="center">Section Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.0</td>
+<td align="center">Text Formatation</td>
+</tr>
+<tr class="even">
+<td align="center">2.0</td>
+<td align="center">Output formats</td>
+</tr>
+<tr class="odd">
+<td align="center">3.0</td>
+<td align="center">Code options</td>
+</tr>
+<tr class="even">
+<td align="center">4.0</td>
+<td align="center">Formulas</td>
+</tr>
+<tr class="odd">
+<td align="center">5.0</td>
+<td align="center">Links</td>
+</tr>
+<tr class="even">
+<td align="center">6.0</td>
+<td align="center">Images</td>
+</tr>
+<tr class="odd">
+<td align="center">7.0</td>
+<td align="center">Tables</td>
+</tr>
+</tbody>
+</table>
+<pre><code>|Number Section|Section Name|
+|:---:|:---:|
+|1.0|Text Formatation|
+|2.0|Output formats|
+|3.0|Code options|
+|4.0|Formulas|
+|5.0|Links|
+|6.0|Images|
+|7.0|Tables|
+</code></pre>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Following are the references used in this tutorial. They are very complete and useful, I sugest that you check it for more informations about Rmarkdown.</p>
+<p><a href="https://bookdown.org/yihui/rmarkdown/" class="uri">https://bookdown.org/yihui/rmarkdown/</a> <a href="https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols" class="uri">https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols</a> <a href="http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html" class="uri">http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html</a> <a href="https://gist.github.com/derekmcloughlin/896da22518ef2f3d81b0" class="uri">https://gist.github.com/derekmcloughlin/896da22518ef2f3d81b0</a> <a href="https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Calculus.html" class="uri">https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Calculus.html</a></p>
+<p><strong>I hope you found this tutorial helpful! Cheers! :)</strong></p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/r-markdown/">R Markdown</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/r/">R</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/tutorial/">tutorial</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/02/introductory-tutorial-on-rmarkdown/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/02/introductory-tutorial-on-rmarkdown/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Gabriela Mourao. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/02/introductory-tutorial-on-rmarkdown/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/02/introductory-tutorial-on-rmarkdown/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2019%2F02%2Fintroductory-tutorial-on-rmarkdown%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F02%2Fintroductory-tutorial-on-rmarkdown%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Gabriela Mourao</h4>
+    
+      <div id="about-card-bio">Economist, Data Scientist, passionate about innovation</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Master Candidate @HKU
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Hong Kong
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/02/introductory-tutorial-on-rmarkdown/">
+                <h3 class="media-heading">Introductory Tutorial on Rmarkdown</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/07/hello-r-markdown/">
+                <h3 class="media-heading">Hello R Markdown</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/06/welcome-to-tranquilpeak-0.4.4-beta/">
+                <h3 class="media-heading">Welcome to Tranquilpeak 0.4.4-BETA</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak is a gorgeous responsive theme for Hugo blog framework. It has many features and integrated services to improve user experience.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/06/who-is-using-tranquilpeak-hugo-theme/">
+                <h3 class="media-heading">Who&#39;s using Tranquilpeak Hugo Theme</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Here you can find a list of the blogs that use Tranquilpeak theme, with different styles and customizations.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/05/elements-showcase/">
+                <h3 class="media-heading">Elements showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&rsquo;s simple and elegant.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/05/cover-image-showcase/">
+                <h3 class="media-heading">Cover image showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak integrate a unique &ldquo;cover image&rdquo; feature. Open this post to see how this feature sublimate your article.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2015/03/highlighted-code-showcase/">
+                <h3 class="media-heading">highlighted code showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Tranquilpeak Hugo theme have its own theme to highlight source code. It&rsquo;s based on GitHub theme: simple and elegant. Check out how it sublimate source codes.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2014/10/tags-plugins-showcase/">
+                <h3 class="media-heading">Tags plugins showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2014
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how tag plugins are displayed. See <a href="https://github.com/kakawait/hugo-tranquilpeak-theme/blob/master/docs/user.md#tags">docs</a> for more info.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2014/08/hidden-social-section-showcase/">
+                <h3 class="media-heading">Hidden social section showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2014
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the social section is hidden.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2014/08/hidden-tag-section-showcase/">
+                <h3 class="media-heading">Hidden tag section showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2014
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>This post is used to show how a site looks if the tag section is hidden.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         15 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://res.cloudinary.com/gcmourao/image/upload/v1550130821/cover4.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

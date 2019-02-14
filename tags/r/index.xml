@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Gabriela Mourao</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on Gabriela Mourao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introductory Tutorial on Rmarkdown</title>
+      <link>/2019/02/introductory-tutorial-on-rmarkdown/</link>
+      <pubDate>Thu, 14 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/02/introductory-tutorial-on-rmarkdown/</guid>
+      <description>The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document. If you are new to Rmarkdown, please check the following reference for instalation guidance: https://bookdown.org/yihui/rmarkdown/installation.html Text FormatationBasic Formatationa. Manual line Break
+To add a line break, you can type two or more spaces in the end of the line, just like that:</description>
+    </item>
+    
+  </channel>
+</rss>
