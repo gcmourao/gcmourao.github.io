@@ -215,7 +215,7 @@ output:
 
 ```
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
-knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/output2.png")
+knitr::include_graphics("img/output2.png")
 ``` 
 
 <br>
@@ -226,7 +226,7 @@ knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/outp
 Flatly theme:
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
-knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/flatly.png")
+knitr::include_graphics("img/flatly.png")
 ```
 
 
@@ -237,7 +237,7 @@ knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/flat
 Journal theme:  
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
-knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/journal_and_haddock.png")
+knitr::include_graphics("img/journal_and_haddock.png")
 ```
 
 
@@ -246,7 +246,7 @@ knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/jour
 Lumen theme: 
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
-knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/lumen.png")
+knitr::include_graphics("img/lumen.png")
 ```
 
 
@@ -350,7 +350,7 @@ For example:
 - The total distance in Cars dataset is `r sum(cars$dist)`
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
-knitr::include_graphics("C:/Users/gcmou/Documents/GitHub/Rmarkdown_tutorial/Inline_code.png")
+knitr::include_graphics("img/Inline_code.png")
 ```
 
 
