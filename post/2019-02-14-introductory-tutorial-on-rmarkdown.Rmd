@@ -29,7 +29,10 @@ keywords:
 #    -   [Color Considerations](#color-considerations)
 #-   [Key Takeaways](#key-takeaways)    
 #-   [Future Work](#future-work)
-
+#output:
+#  blogdown::html_page:
+#    toc: true
+#    toc_depth: 1
 ```
 
 
@@ -47,29 +50,44 @@ library(plotly)
 #automatically format the R code
 library(formatR)
 library(tinytex)
+#<!--more-->
 ```
 <br>
-The main goal in this document in cover the very basics formatation for Rmarkdown, no matter if you are building a Html or pdf document.
-If you are new to Rmarkdown, please check the following reference for instalation guidance:
-https://bookdown.org/yihui/rmarkdown/installation.html
 <br>
 
-# Text Formatation 
+Rmarkdown is a super useful package in R! It enables the creation of reports in different formats like word, pdf, html, and others; all of them very neat and professional. I also like to use it in small projects, since it is possible to comment all steps in a very organized way, besides that you can even develop your own theme and the results are awesome!    
+I decided to make this tutorial to help those who are new to Rmarkdown, making it very straightforward to the features that I use most, so one can start using all the awesome options of this package that makes our lives much easier right away! Besides that, it can also work to refresh our minds, since there are many useful options that might be forgotten because we don’t use very often, but in some contexts, they really make difference (for example, the cache option that makes the knit process faster when we are dealing with heavy outputs).    
+If you are new to Rmarkdown, please check the following reference for installation guidance: https://bookdown.org/yihui/rmarkdown/installation.html    
+And by the way, for those who are not new to Rmarkdown, but want more information about it, the Bookdown is the definitive guide! And I highly recommend you to check it out.    
+<br>
+I hope you find this tutorial helpful! And let me know your feedback about it! Cheers!!
+ 
 
-## Basic Formatation   
+--------
+
+- [Text Formatation](#text-formatation)
+- [Output formats](#output-formats)
+- [Code](#code)
+- [Formulas](#formulas)
+- [Links](#links)
+- [Images](#images)
+- [Tables](#tables)
+- [References](#references)
+
+
+#Text Formatation 
+
+### Basic Formatation   
 **a. Manual line Break**   
 
-To add a line break, you can type two or more spaces in the end of the line, just like that:   
-*this is a new line*   
+To add a line break, you can type two or more spaces in the end of the line or use the break tag (`<br>`).
 
 **b.Headers type**
 
-```
-# Header 1
-## Header 2
-### Header 3
+`# Header 1`
+`## Header 2`
+`### Header 3`
 
-```
 **c.Text Emphasis**   
    
 *- Italic Format*   
@@ -86,7 +104,7 @@ Superscript^1^
 ```
  
 
-## Lists
+### Lists
 
 **a. Ordered list**   
 
@@ -111,20 +129,20 @@ Superscript^1^
 
 ---------------------------------
 
-## Page Break
+### Page Break
 
-To add a page break, as the example above, you can simply type four or more dashes or asteristics:
+To add a page break, as the example above, you can simply type four or more dashes or stars:
 
 ```
 ------ or 
 ******
 
 ```
-## Blockquotes
+### Blockquotes
 
 **a. Plain Code Block **
 
-Since the beggining of this session I am using this option to show how to apply each of the formattings introduced up to now. With them it is possible to write some code in a fixed-width box,  but not evaulating it:
+Since the beginning of this session I am using this option to show how to apply each formatting introduced up to now. Using this it is possible to write some code in a fixed-width box without evaluating it:
 
 ```
       ```
@@ -165,8 +183,9 @@ There are several outputs formats available in Markdown:
 * slidy_presentation   
 * word_document   
 
-Up to now, this tutorial have been focusing on markdown syntax in a more broadly way, But now, lets focus on some options for **html_document** output.    
-If you type ?rmarkdown::html_document in your R console, you can get a list of all options for HTML document. The ones that I use most are described below:   
+Up to now, this tutorial has been focusing on some basic markdown syntax in a more generic way. So let’s now focus on some options for the **html_document** output.    
+If you type ?rmarkdown::html_document in your R console, you can get a list of all options for HTML document. Below you can find the ones that I use more frequently in my projects and I consider more important:   
+   
 
 - **code_folding:** Enable document readers to toggle the display of R code chunks. Specify "none" to display all code chunks (assuming they were knit with echo = TRUE). Specify "hide" to hide all R code chunks by default (users can show hidden code chunks either individually or document-wide). Specify "show" to show all R code chunks by default.   
 - **toc:** to include a table of contents in the output     
@@ -176,7 +195,7 @@ If you type ?rmarkdown::html_document in your R console, you can get a list of a
 - **number_sections:** TRUE to number section headings
 - **self_conteained:** Produce a standalone HTML file with no external dependencies.
 
-## Usage examples:
+### Usage examples:
 
 Following you can find some usage examples of the mentioned options:
 
@@ -196,7 +215,6 @@ Following you can find some usage examples of the mentioned options:
 knitr::include_graphics("img/output1.png")
 ```
 
-<br>
 ---------------------------------   
 
 Including section number:   
@@ -218,19 +236,15 @@ output:
 knitr::include_graphics("img/output2.png")
 ``` 
 
-<br>
-
 ---------------------------------
 
+There are many themes available in Rmarkdown package, my preferred ones are: Flatly, Journal and Lumen.      
 <br>
 Flatly theme:
 
 ```{r, echo = FALSE, out.width = "80%", fig.align = "center"}
 knitr::include_graphics("img/flatly.png")
 ```
-
-
-<br>  
 
 ----------------------------------------   
 
@@ -249,23 +263,20 @@ Lumen theme:
 knitr::include_graphics("img/lumen.png")
 ```
 
-
-<br>
-
 ---------------------------------   
 
 # Code
 
-## Echo Options
+### Echo Options
 
-To insert some codes in the markdown document, the called code chunk, it is necessary to add three backticks like ??? followed by {r}, where r indicates the language name. To close the code chunk, add another three backticks in the end. You can write chunk options in the curly braces, as we are going to see in the following examples.     
+To insert some codes in the markdown document, the called code chunk, it is necessary to add three backticks like followed by {r}, where r indicates the language. To close the code chunk, add another three backticks in the end. Other option is using the shortcut `Ctrl` + `Alt` + `i` or if you are using R-Studio simply go to `insert` -> `R` and the chunk code will be added for you.   
+
 
 ```{r}
 summary(cars)
 ```
 
-Another easier way to add a R code chunk is simply type: "ctrl + alt + i". It is possible to control the code output adding some chunk options inside the curly braces: {r }.   
-Following, some very useful options that I use very frequently:   
+It is possible to control the code output adding some chunk options inside the curly braces: `{r }`. Following, you can find some useful options that I use very frequently:   
 
 - **eval:** TRUE to evaluate the code chunk  
 - **echo:** TRUE to show the code in the output document   
@@ -279,18 +290,21 @@ Following, some very useful options that I use very frequently:
 - **fig.align:** The alignment of plots. It can be 'left', 'center', or 'right'.  
 - **fig.cap: ** To include some figure caption.
 
-For a better understanding of how these options work, we can see some examples below:   
+For a better understanding of how those options works, let’s take a look into some practical examples as follow:  
 
 1. **{r, include = FALSE}**   
       + Code not shown   
-      + results not shown   
+      + results not shown 
+```{r, include=FALSE}
+summary(cars)
+```
+
 2. **{r, echo = FALSE}**   
       + Code not shown
       + results shown   
 ```{r, echo=FALSE}
 summary(cars)
 ```
-
 
 3. **{r, results = 'hide'}**   
       + Code shown   
@@ -314,7 +328,7 @@ summary(cars)
 
 ```{r, out.width='30%', fig.align='center', fig.cap='Amazing Hong Kong'}
 
-#knitr::include_graphics('C:/Users/gabriela.mourao/Documents/6-PESSOAL/timon-studler-49992-u#nsplash.jpg')
+knitr::include_graphics('img/timon-studler-49992-unsplash.jpg')
 
 ```
 
@@ -334,16 +348,16 @@ ggplot(cars, aes(x=speed, y=dist)) +
 ```
 
    
-There are many options available for control the Code Chunk output, if you want more information about it in the following links you can find good references:   
+There are many options available for control the Code Chunk output, if you want more information about it, the following links are very good references:   
 https://yihui.name/knitr/options/   
 https://bookdown.org/yihui/rmarkdown/r-code.html   
 https://www.overleaf.com/learn/latex/Positioning_images_and_tables
 
 
 
-## Inline Code  
+### Inline Code  
 
-If one wants to add just a small code expression in the markdown text, it is necessary to add one backticks like in the example below:   
+If you wants to add just a small code expression in the markdown text, just add one backticks before and another one after the code expression.   
       
 For example:   
 - The total speed in Cars dataset is `r sum(cars$speed)`   
@@ -358,10 +372,9 @@ knitr::include_graphics("img/Inline_code.png")
 
 # Formulas    
 
-## Inline and display mode
+### Inline and display mode
 
-If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: "This is an inline example formula: 
-$$E=mc^2$$ "
+If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: "This is an inline example formula: `$E=mc^2$` "
 
 ```
       "This is an inline example formula: $E=mc^2$"
@@ -369,14 +382,15 @@ $$E=mc^2$$ "
 ```
 
 But, if you are typing a very long expression, you might think that is better to use the display mode: 
-$$a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})$$
+<br>
+`$$a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})$$`
 
 ```
    $$a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})$$
 
 ```
 
-## Symbols:
+### Symbols:
 
 Some useful symbol formatations:
 
@@ -395,7 +409,7 @@ Some useful symbol formatations:
 |$\hat{y}$|`\hat{y}`| y hat|
 |$\bar{y}$|`\bar{y}`| y bar|
 
-## Greek Letters  
+### Greek Letters  
 
 |Symbol| Latex | Comment
 |:---:|:---:|:---:|
@@ -407,7 +421,7 @@ Some useful symbol formatations:
 |$\pi$| `\pi`| pi|
 |$\Sigma~\sigma~\varsigma$| `\Sigma \sigma \varsigma`| Sigma|
 
-## Index
+### Index
 
 $$
 \begin{align}
@@ -424,9 +438,9 @@ x^2_i, x^2_{i,j} (Combined)
 
 ```
 
-## Expressions
+### Expressions
 
-### Square roots
+#### Square roots
 To indicate a square root, use `\sqrt`: $\sqrt{x}$
 
 ```
@@ -434,7 +448,7 @@ $\sqrt{x}$
 
 ```
 
-### Fractions
+#### Fractions
 The fractions are displayed using `\frac` symbol:<br>  
 $x=\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}$<br>   
 or adding a parantesis:<br>   
@@ -446,7 +460,7 @@ $x=\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}$
 $x=\left(\frac{1}{1+e^{\beta_0+\beta_{1}\times y}}\right)$
 
 ```
-### Summation expression
+#### Summation expression
 To add a summation sign, you can use `\sum` and combine it with the index syntax introduced above:
 $\sum_{i=1}^n(y_i-\hat{y})^2$
 
@@ -455,7 +469,7 @@ $\sum_{i=1}^n(y_i-\hat{y})^2$
 
 ```
 
-### Others
+#### Others
 $$\int_0^{a} x^k~dx$$
 
 ``` 
@@ -483,7 +497,7 @@ $$\lim_{x \to +\infty} \frac{3x^2 +7x^3}{x^2 +5x^4} = 3$$
 ```
 
 
-## Matrices
+### Matrices
 
 $$\mathbf{X} = \left[\begin{array}
 {rrr}
@@ -508,7 +522,7 @@ $\mathbf{y}=\mathbf{X}\beta$
 
 ```
 
-## Alignment and comments:
+### Alignment and comments:
 
 You can use "~" to add some spaces in the formula:
 $$ x_{i} + y_{i} \ge 0 ~~~~~~~\forall~i \in \mathbb{R} $$
@@ -563,16 +577,17 @@ https://www.rstudio.com
 
 
 ---------------------------------
-
+   
 # Images   
 
 For images, the syntax is very similar to links:   
 
-nn
+![The amazing Hong Kong](img/timon-studler-49992-unsplash.jpg)^[photo by timon studler on unsplash]
+
 
 ```
 
-![The amazing Hong Kong](C:/Users/gabriela.mourao/Documents/6-PESSOAL/timon-studler-49992-unsplash.jpg)^[photo by timon studler on unsplash]  
+![The amazing Hong Kong](img/timon-studler-49992-unsplash.jpg)^[photo by timon studler on unsplash]  
 
 
 ```
@@ -618,5 +633,4 @@ http://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html
 https://gist.github.com/derekmcloughlin/896da22518ef2f3d81b0
 https://www.maths.tcd.ie/~dwilkins/LaTeXPrimer/Calculus.html   
    
-   
-**I hope you found this tutorial helpful! Cheers! :)**
+**Thank you! :)**
