@@ -89,7 +89,16 @@ I decided to make this tutorial to help those who are new to Rmarkdown, making i
     
     
   </head>
-
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
   <body>
     <div id="blog">
       <header id="header" data-behavior="4">
@@ -551,7 +560,7 @@ ggplot(cars, aes(x=speed, y=dist)) +
 <h1>Formulas</h1>
 <div id="inline-and-display-mode" class="section level3">
 <h3>Inline and display mode</h3>
-<p>If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: “This is an inline example formula: <code>$E=mc^2$</code>”</p>
+<p>If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: “This is an inline example formula: <span class="math inline">\(E=mc^2\)</span>”</p>
 <pre><code>      &quot;This is an inline example formula: $E=mc^2$&quot;
 </code></pre>
 <p>But, if you are typing a very long expression, you might think that is better to use the display mode: <br> <code>$$a^n + b^n = (a - b)(a^{n-1} + a^{n-2}b + a^{n-3}b^2 + ... + ab^{n-2} + b^{n-1})$$</code></p>

@@ -374,7 +374,7 @@ knitr::include_graphics("img/Inline_code.png")
 
 ### Inline and display mode
 
-If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: "This is an inline example formula: `$E=mc^2$` "
+If you are typing just a small formula, you might just want to add it in the line that you are typing. for example: "This is an inline example formula: $E=mc^2$ "
 
 ```
       "This is an inline example formula: $E=mc^2$"
