@@ -1,0 +1,17 @@
+---
+title: My Bio
+author: Gabriela Mourao
+date: '2019-02-15'
+slug: my-bio
+categories:
+  - Bio
+tags:
+  - R Markdown
+keywords:
+  - tech
+comments: no
+showMeta: no
+showActions: no
+---
+
+Teste
