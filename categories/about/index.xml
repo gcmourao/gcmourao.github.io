@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About on Gabriela Mourao</title>
+    <link>/categories/about/</link>
+    <description>Recent content in About on Gabriela Mourao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/</link>
+      <pubDate>Fri, 15 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I graduated with a bachelor’s degree in Economics from the Federal University of Minas Gerais in Belo Horizonte/Brazil. Since the very beginning of the course I got passionate about Statistical Modeling after taking some Econometric courses. After that, I decided to deepen my knowledge attending some additional courses like Calculus, Linear Algebra and Differential Equations in the University’s Statistics department.
+After my graduation, I had the opportunity to live in the biggest cities in Brazil: Sao Paulo and Rio de Janeiro.</description>
+    </item>
+    
+  </channel>
+</rss>

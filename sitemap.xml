@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/bio/my-bio/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
+    <loc>/about/</loc>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,36 +13,35 @@
   </url>
   
   <url>
+    <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/about/</loc>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/about/</loc>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/bio/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/bio/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/bio/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -60,13 +59,13 @@
   
   <url>
     <loc>/tags/r-markdown/</loc>
-    <lastmod>2019-02-15T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-02-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
