@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Gabriela Mourao</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Social Media Project</title>
+      <link>/2019/05/social-media-project/</link>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/social-media-project/</guid>
+      <description>This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.</description>
+    </item>
     
     <item>
       <title>Introductory Tutorial on Rmarkdown</title>

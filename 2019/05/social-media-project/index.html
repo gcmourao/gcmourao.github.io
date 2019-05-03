@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Gabriela Mourao">
+<meta name="keywords" content="tech">
+<meta name="description" content="This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.">
+
+
+<meta property="og:description" content="This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Social Media Project">
+<meta name="twitter:title" content="Social Media Project">
+<meta property="og:url" content="/2019/05/social-media-project/">
+<meta property="twitter:url" content="/2019/05/social-media-project/">
+<meta property="og:site_name" content="Gabriela Mourao">
+<meta property="og:description" content="This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.">
+<meta name="twitter:description" content="This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-05-03T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-05-03T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="#personalprojects">
+    
+  
+  
+    
+      <meta property="article:tag" content="#R">
+    
+      <meta property="article:tag" content="#sna">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+
+
+    <title>Social Media Project</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/05/social-media-project/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Gabriela Mourao</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Gabriela Mourao</h4>
+        
+          <h5 class="sidebar-profile-bio">Economist &amp; Data Scientist, passionate about Analytics and Innovation.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/about/index.html">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/gcmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/gabriela-consuelo-mourao-a603757b/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/gabrielacmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Social Media Project
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-03T00:00:00Z">
+        
+  May 3, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/#personalprojects">#personalprojects</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="/rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<p>This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.<br> Later, Mawuli and I decided to use the project content to publish some articles that could be useful for other persons that are planning to develop similar studies. This will be the first of five different articles based in that project:<br> <br> - <a href="https://">Summary report</a>: In this article we focus on insights obtained through the analysis and its application to business. It works as a summary, without going too deep into technical aspects. Since we are students in a Business Analytics programme, we decided that it would be interesting to show a little of how analytics tools can be applied to give insights to business and support data drive strategies.<br />
+- <a href="https://">Topic Model</a>: In this article we are going to show in more detail how we used algorithms to perform topic modeling. It will be more technical and focused on a step by step break down of our R-script.<br />
+- <a href="https://">Sentiment Analysis</a>: Again, this will be more technical article, focused both on the sentiment analysis and agreement analysis.<br />
+- <a href="https://">User Cluster</a>: Similar to the Topic Modeling article, in this one we are going to focus on the User Cluster Development.<br />
+- <a href="https://">Social Networks Analysis with Gephi</a>: In this article we are going to explore basic Social Network concepts and give a brief introduction to Gephi. <br></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The online newspaper sector has been through a lot of rapid change due to the emergence of social media. Many agencies, like South China Morning Post (SCMP), have switched up and adopted new online and social strategies to attract online audience and increase revenue.<br></p>
+<p>The South China Morning Post was established in Hong Kong in 1903 by Tse Tsan-Tai and Alfred Cunningham and published its first newspaper in English on November 6th 1903. Nowadays, it became one of the most important news portal in Hong Kong, being acquired by Alibaba in 2015. It set out as a global media company that reports mainly about Hong Kong and mainland China to an international audience.<br></p>
+<p>We decided to analyse SCMP because they are one of the most competitive newspaper in broadcasting news from China to the rest of the word. Besides that, they are very active on Twitter since this social media platform is part of their strategy to increase engagement and subsequently their profit.<br></p>
+<p>This newspaper produces content that covers multiple topics such as business, technology, and lifestyle. In order to achieve its mission of becoming the bridge of communication between Asia and the world, SCMP went through a series of transformations in 2018 that has allowed them to reach a broader audience.<br></p>
+<p>In this project we analyzed the Twitter data from SCMP aiming to understand its Social Media Network. Our goal was to understand how the Twitter Users on SCMP’s account behave and then find opportunities on how SCMP can capitalize on its social media strategy.</p>
+<p>This article is divided in the following sections:<br />
+- Data Extraction and Transformation<br />
+- Tools<br />
+- Overview<br />
+- The alternative approach<br />
+- Social Network graphs<br />
+- Conclusion<br />
+- Recomendation<br />
+- Resources</p>
+</div>
+<div id="data-extraction-and-transformation" class="section level1">
+<h1>Data Extraction and Transformation</h1>
+<p>To extract the data from Twitter, we used the package <code>rtweet</code> and the search term “SCMPNews”. The data was extracted three times during the period from Dec/18 to Jan/19:<br><br />
+- First Extraction: December 18th, 2018 <br> - Second Extraction: December 25th, 2018 <br> - Third Extraction: January 1st, 2019 <br></p>
+<p>Each of those extractions brings in average the last seven days data. Therefore, the resulting data was merged, duplicated tweets were excluded and finally we were able to collect data from 12/10/2018 to 01/01/2019.<br> Besides that, from the data extracted, the team broke it down into three different component files that were used in the further analysis. These files are: <br><br />
+- Vertex data: File with information about the user account like number of friends, number of tweets, account language and others.<br> - Edge data: File with user’s relationship trough tweets, like: retweet, reply, mention and others.<br> - Tweet Data: Is the original file extract using the Twitter API.<br></p>
+</div>
+<div id="tools" class="section level1">
+<h1>Tools</h1>
+<p>For our analysis, we identified the following software options to develop our analysis:<br> - R <br> - NodeXL <br> - Gephi <br> - Python <br> NodeXL had the capability of handling most of the social network analysis we wanted to do however, due to its limitations as an Excel plug-in in handling large amounts of data, we ended up adopting only R, Python and Gephi. R was used for data extraction, time-series, topic modeling, natural language processing and cluster analysis. Python was used for data wrangling, and sentiment analysis under natural language processing. And lastly, Gephi was used to perform social network analysis based on the extracted data.</p>
+<p>In our final data we had 25.372 uniques tweets, 13.267 users and 50.157 relationships (We only considered tweets in English for this analysis). In average there are 1103 tweets per day in the data, but we clearly see that on the 18th of December, there was some event that made the amount of tweets increase up to 2000 tweets in total. After some analysis we figured out that the trending topic at that day was the “USA and China Trade war” and you can see more details about this in <a href="https://">Topic Model</a> article.<br></p>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"visdat":{"255856452dee":["function () ","plotlyVisDat"]},"cur_data":"255856452dee","attrs":{"255856452dee":{"x":{},"y":{},"mode":"lines","line":{"color":"rgb(0, 0, 102)","width":3},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"range":[1544400000000,1546041600000],"rangeslider":{"visible":true},"title":"time"},"title":"Tweets per day","yaxis":{"domain":[0,1],"automargin":true,"title":"total"},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["2018-12-10","2018-12-11","2018-12-12","2018-12-13","2018-12-14","2018-12-15","2018-12-16","2018-12-17","2018-12-18","2018-12-19","2018-12-20","2018-12-21","2018-12-22","2018-12-23","2018-12-24","2018-12-25","2018-12-26","2018-12-27","2018-12-28","2018-12-29","2018-12-30","2018-12-31","2019-01-01"],"y":[1310,1425,1268,1102,1247,1011,794,1464,1970,1233,1129,1015,931,733,850,832,1191,1299,1220,796,652,1158,742],"mode":"lines","line":{"color":"rgb(0, 0, 102)","width":3},"type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>In this context, we know that SCMP is the primary source of content, so it is reasonable to expect that its social network would be built around its profile. However, what we could see from its graph is that the power of this account is so high that is hard to identify relevant sub-networks in its structure. For example, when we compare the betweenness centrality from the top users, we see that the difference between SCMP (top 1) and the other ones is huge (note that this metric is normalized to make easier the comparison):</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">User<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></th>
+<th align="center">Betweenness Centrality</th>
+<th align="center">Degree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Top 1</td>
+<td align="center">0.98</td>
+<td align="center">6412</td>
+</tr>
+<tr class="even">
+<td align="center">Top 2</td>
+<td align="center">0.12</td>
+<td align="center">654</td>
+</tr>
+<tr class="odd">
+<td align="center">Top 3</td>
+<td align="center">0.05</td>
+<td align="center">298</td>
+</tr>
+<tr class="even">
+<td align="center">Top 4</td>
+<td align="center">0.03</td>
+<td align="center">343</td>
+</tr>
+<tr class="odd">
+<td align="center">Top 5</td>
+<td align="center">0.02</td>
+<td align="center">121</td>
+</tr>
+</tbody>
+</table>
+<p>According to Borgatti et al. (2013)<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, betweenness centrality “is a measure of how often a given node falls along the shortest path between two other nodes”. So, the high value obtained for SCMP node means that its profile is “in the middle” of most conversations (i.e edges). That’s why it’s difficult to find sub-communities in this network, once most of the relationships are directly related to SCMP. After running the modularity clustering available in Gephi, we were able to find 21 different communities and the most important ones are highlighted in dark blue, yellow, light blue, red, black, purple and all the other (small) ones are in gray. As one can notice, comparing to the giant component in dark blue where SCMP node is in, none of the others sub-networks have high relevance.<br />
+<img src="img/overview_no_label2.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-alternative-approach" class="section level1">
+<h1>The Alternative Approach</h1>
+<p>To come up with more insightful analysis, we decided to use an alternative approach by combining topic clustering, user clustering and sentiment analysis to split this giant network into meaningful sub-networks. For a deeper understanding of those analyses you can go through the following articles: <a href="https://">Topic Model</a>, <a href="https://">User Cluster</a>, <a href="https://">Sentiment Analysis</a>, <a href="https://">Social Network Analysis with Gephi</a></p>
+<div id="topic-modelling" class="section level2">
+<h2>Topic Modelling</h2>
+<p>As said before, SCMP is a important player in the News sector as such it is always producing content about several different subjects. Those topics are classified in their website as follow:</p>
+<p><img src="img/topic_SCMP.jpg" width="90%" style="display: block; margin: auto;" /></p>
+<p>With this said, we decided to identify the naturally occuring topics that were commented in SCMP network. Notice that we are considering not only SCMP posts but also all the other users’ tweets, which means that the analysis is broader then just the content that SCMP produces alone.<br> To achieve this goal, we used a popular topic model algorithm called Latent Dirichlet Allocation (available in <code>topicmodel</code> R package), which is an unsupervised machine learning method. As output of this modeling part we got 6 different topics as described below:<br> <br> - <strong>USA and China</strong>: News related to the international relationship between USA and China. This group refers to posts and conversationtions that had special attention to the Trade war issue druing this period. This explains why these words are bigger than the others.<br />
+- <strong>International</strong>: News related to the international scene. In this part of the cloud we can see the name of some countries like “Canada”, “Japan” and “India”. In this topic the principal news item was related to the arrest of a top Huawei executive in Canada.<br />
+- <strong>Hong Kong News</strong>: In this topic we have many different topic news but all of them happened or had some relationship with Hong Kong.<br />
+- <strong>Mainland China</strong>: News from or about Mainland China. Some of the popular news items in this topic are about a group of Christians that were arrested during this period.<br />
+- <strong>Sports</strong>: In this case the news that generated most engagement were the ones related to some rumors of Japan Olympic games boycott because of the new Japanese police about Whale Hunting.<br />
+- <strong>Business</strong>: General news about business. In this cloud we can see some terms like: “Jack Ma”, “CEOs”, “wrapping” and “Christmas”.<br />
+<br> Interestingly, we didn’t find all the contents that SCMP classify in its website, which means that not all of them produce enough engagement. Probably the non-identified topics reach a very specific kind of user and, comparing to the whole network, it doesn’t play a role important enough for us to identify it as an isolated topic.<br></p>
+<p><img src="/post/2019-05-03-social-media-project_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="sentiment-analysis" class="section level2">
+<h2>Sentiment Analysis</h2>
+<p>Another interesting topic in social media is Sentiment Analysis and specially in the context of news, this analysis helps understand how users react to each topic. It can also help to understand how the opinion is spread along the relationships trough the network. But even more interestingly is the agreement analysis, which shows the extent to which the sentiment of the users matches the sentiments of the original news posts. This kind of analysis in this context can be used as a means of the assessing how people perceive the crediblity of a news agency.<br></p>
+<p>As we can see from the cloud below, some words like: “american”, “propaganda”, “trade”, “war” and “China” are very frequent in posts classified as negative. While words like: “Jack Ma”, “founder”, “CEOs” and “bravo” are frequent in positive posts. Given the time-frame context and the fact that SCMP is a Chinese News paper targeting readers from accross the world, this word cloud shows that SCMP is objective in report its news. Under regular circumstances news on the trade war between China and the United States of America, during the time when tension was highest, would be expected to have negative sentiments. And this is reflected in the negative words in word cloud. So this shows objectivity when it comes to the reporting of SCMP’s news.<br></p>
+<p><img src="/post/2019-05-03-social-media-project_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Our expectation from an agreement analysis is that on average, the sentiment scores of SCMP’s posts would match the sentiment scores of the the replies to SCMP’s posts. What we see in the agreement visualization below is that majority of SCMP’s tweets had neutral sentiments, while the negative sentiment tweets were more than the positive sentiment tweets. On the other hand the replies also had neutral sentiments with the remaining ones being evenly distributed among the positive and negative tweets. What this means is that there is a good level of agreement on average in the replies to the posts that SCMP put out. This indicates a good level of trust in SCMP’s users and this is positive for any news company.<br></p>
+<p><img src="img/SCMP%20histogram.png" width="95%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="user-cluster" class="section level2">
+<h2>User Cluster</h2>
+<p>We also developed a user clustering to understand the different kind of users in our data and how they interact with the different topics. For this task we used a K-mean algorithm, with 9 groups. The variables used in this model are:<br />
+- Percentage of tweets in each of the topics found with the previous model<br />
+- Number of followers<br />
+- Number of following profiles<br />
+- Number of Tweets. Is this case is the total number of tweets that each users posted in their accounts.<br />
+- Average sentiment. Average sentiment score, according to the analysis explained previously.<br />
+- Total Number of tweets that each user posted in the period with that contains the term ‘scmpnews’.<br></p>
+<p>All variables were normalized before running the K-means algorithm and the best solution that we got had 9 groups:<br></p>
+<p><img src="img/cluster.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Our result shows that we have some groups that are specialized in one of the topics obtained with the topic modeling part. Which means that during the period in our data their interaction was more focused in one of the topics when comparing to the other ones. For example, the cluster “Hong Kong News - Neutral sentiment” has more posts in the topic “Hong Kong News” than in the other ones. Regardless the topic variable, the users from the specialized clusters (“Hong Kong News - Neutral sentiment”, “China News with negative sentiment”, “Sports News with negative sentiment”, “International News with negative sentiment”, “Entertainment News”, “USA and China News with negative sentiment”) are similar in terms of account information. They have similar average number of followers, tweets and account age, and comparing to the other clusters, they are smaller. In summary, they are just average users with more interest in one of modeled topics than the others.<br />
+The other three groups (“Small users very active in this context”, “Big Accounts”, “Heavy tweet users”) are more generic in terms of topic interest. During the period they didn’t show any specialization in some of the topics, they rather talk/ interact with all of them. The difference between them is the size of the account: the group “Small users very active in this context” have the same characteristic from the specialized groups regarding the account size, but they have a different behavior in this context. They are very active and interested in all kind of news and they have the second higher number of tweets per user (average). The other two are more likely to be organization profiles (like SCMP) or influencers, like politicians and journalists.<br />
+Finally, having those user groups defined gives a better chance for targeting users with content that they are more likely to engage. This will lead to a greater likelihood for them to follow through visiting SCMP’s website for more news; which is way to SCMP capitalize its social media strategy.</p>
+</div>
+</div>
+<div id="social-network-graphs" class="section level1">
+<h1>Social Network Graphs</h1>
+<p>After modeling the topic, user cluster and sentiment, we were able to put all those pieces together and split the data into sub - networks. To generate each of these visualizations we separated the data according to the tweet topic classification (i.e edge) and then applied the color to the node’s correspondent to the user cluster and the edges colors are the sentiment classification.<br />
+Each of the sub-networks obtained are now relevant enough and meaningful, since we can easily see the kind of user and sentiment in each of them. Besides that, we can identify new brokers that wasn’t possible to identify in the first visualization. Which means that the influencers differ according to the context (topic) in the network.</p>
+<p><img src="img/networks.png" width="95%" style="display: block; margin: auto;" /> <br> <br><br />
+So, based on this result some strategies can be tailored for each of those groups. For example, lets focuse on the USA and China News sub-network:</p>
+<p><img src="img/topic3_v8.png" width="50%" style="display: block; margin: auto;" /> - Predominantly, we see two users’ types: “USA and China News” and “Heavy users in SCMP network”. This same pattern repeats for all the other sub-networks, the two major user groups are the ones interested in the specific topic and the heavy users.<br />
+- We could identify other important users that have high betweenness centrality in the network (the nodes with higher diameter). They are in the middle of the shortest path between the isolated points and SCMP profile. It is interesting to notice that the sentiment from the “broker’s followers” replicates the broker’s sentiment spread previously, which means that their opinion is very important and in a certain way followed by the users connected with him.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">User*</th>
+<th align="center">Betweenness Centrality</th>
+<th align="center">Degree</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Top 1</td>
+<td align="center">0.90</td>
+<td align="center">1301</td>
+</tr>
+<tr class="even">
+<td align="center">Top 2</td>
+<td align="center">0.37</td>
+<td align="center">654</td>
+</tr>
+<tr class="odd">
+<td align="center">Top 3</td>
+<td align="center">0.15</td>
+<td align="center">260</td>
+</tr>
+</tbody>
+</table>
+<p>Those isolated groups could be selected, for example, as target for prospect strategies. SCMP can try to reach them through advertisement to engage a direct conversation at first moment (convert them as followers). This will led them to engage more with SCMP content and eventually in the future they could be potential clients for SCMP’s online news subscription service.<br />
+We can identify the similar pattern in the following sub-networks: “Sports News”, “Mainland China News” and “Business News”. <br> In summary the information about each network can be used to design:<br />
+- Prospect strategies for the isolated groups (not directly connected with the giant component)<br />
+- Support to give the right context in each advertisement or marketing campaign run in the network, since we already know the user’s characteristics and what they usually engage more.<br />
+- Improve user experience by customizing the SCMP website for registered users based on the topics that they are more interested in.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>Using some statistical models together with social network theory we were able to identify some patterns in data and understand more deeply the users connected to this network. Over the course of the analysis, our discussions and insights have led to the following conclusions.<br />
+- Negative news tends to have a bigger outreach twitter engagements.<br />
+- The SCMP Network is very concentrated around SCMP profile. More than 80% of all users are classified in the network that SCMP is in and most of the users in SCMP’s news network are direct neighbors.<br />
+- There are many disconnected sub-networks in the data that are connected to the giant component by some specific user. Those disconnected groups are formed by users with specific topic interest.<br />
+- Those users are also influencers in the network since their followers tend to replicate their sentiment.<br />
+We believe that SCMP can take opportunity of this knowledge to create prospect strategies and expand even more their network, by targeting the isolated groups using the right topic with the right perspective they can get the engagement form this users.</p>
+</div>
+<div id="recommendations" class="section level1">
+<h1>Recommendations</h1>
+<ul>
+<li>We believe that would be interesting to add more data points to calibrate topic modeling and user clustering. It would help to improve the user interest identification, to remove any bias related to the period.<br />
+</li>
+<li>The developed analysis can also support costumer experience improvements. For the registered users, the information about its behavior in the social media can guide some customizations in the SCMP website so it would fit user`s interest.</li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References:</h1>
+<div>
+<p>Twitter Icon made by <a href="https://www.freepik.com/" title="Freepik">Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com </a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY </a></p>
+</div>
+<p>Silge, J. &amp; Robison, D. 2010. <a href="https://www.tidytextmining.com/">Text Mining with R</a> - Chapter 6 <br> <a href="https://github.com/gephi/gephi/wiki">Gephi wiki</a> <br> Borgatti, S., Everett, M., Johnson, J. 2013. Analyzing Social Networks. 1st ed., SAGE</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The users name were anonymized<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Borgatti, S., Everett, M., Johnson, J. 2013. Analyzing Social Networks. 1st ed., SAGE<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/#r/">#R</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/#sna/">#sna</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/introductory-tutorial-on-rmarkdown/" data-tooltip="Introductory Tutorial on Rmarkdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/05/social-media-project/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/social-media-project/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Gabriela Mourao. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/introductory-tutorial-on-rmarkdown/" data-tooltip="Introductory Tutorial on Rmarkdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/05/social-media-project/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/social-media-project/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2019%2F05%2Fsocial-media-project%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F05%2Fsocial-media-project%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Gabriela Mourao</h4>
+    
+      <div id="about-card-bio">Economist &amp; Data Scientist, passionate about Analytics and Innovation.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        MsC in Business Analytics @HKU
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Hong Kong
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/social-media-project/">
+                <h3 class="media-heading">Social Media Project</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/02/introductory-tutorial-on-rmarkdown/">
+                <h3 class="media-heading">Introductory Tutorial on Rmarkdown</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Rmarkdown is a super useful package in R! It enables the creation of reports in different formats like word, pdf, html, and others; all of them very neat and professional. I also like to use it in small projects, since it is possible to comment all steps in a very organized way, besides that you can even develop your own theme and the results are awesome!
+I decided to make this tutorial to help those who are new to Rmarkdown, making it very straightforward to the features that I use most, so one can start using all the awesome options of this package that makes our lives much easier right away!</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         2 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://res.cloudinary.com/gcmourao/image/upload/e_art:incognito/v1550130821/cover4.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
