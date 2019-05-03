@@ -21,6 +21,16 @@
     </item>
     
     <item>
+      <title>Topic Model</title>
+      <link>/2019/05/topic-model/</link>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/topic-model/</guid>
+      <description>IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.</description>
+    </item>
+    
+    <item>
       <title>About Me</title>
       <link>/about/</link>
       <pubDate>Fri, 15 Mar 2019 00:00:00 +0000</pubDate>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.3-SNAPSHOT">
+<meta name="author" content="Gabriela Mourao">
+<meta name="keywords" content="tech">
+<meta name="description" content="IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.">
+
+
+<meta property="og:description" content="IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Topic Model">
+<meta name="twitter:title" content="Topic Model">
+<meta property="og:url" content="/2019/05/topic-model/">
+<meta property="twitter:url" content="/2019/05/topic-model/">
+<meta property="og:site_name" content="Gabriela Mourao">
+<meta property="og:description" content="IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.">
+<meta name="twitter:description" content="IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-05-03T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-05-03T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="#personalprojects">
+    
+  
+  
+    
+      <meta property="article:tag" content="#R">
+    
+      <meta property="article:tag" content="#topicmodel">
+    
+      <meta property="article:tag" content="#lda">
+    
+      <meta property="article:tag" content="#nlp">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+  <meta property="twitter:image" content="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg">
+
+
+    <title>Topic Model</title>
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="/2019/05/topic-model/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Gabriela Mourao</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Gabriela Mourao</h4>
+        
+          <h5 class="sidebar-profile-bio">Economist &amp; Data Scientist, passionate about Analytics and Innovation.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/about/index.html">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/gcmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/gabriela-consuelo-mourao-a603757b/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/gabrielacmourao">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Topic Model
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-03T00:00:00Z">
+        
+  May 3, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/#personalprojects">#personalprojects</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="/rmarkdown-libs/vis/vis.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/vis/vis.min.js"></script>
+<script src="/rmarkdown-libs/visNetwork-binding/visNetwork.js"></script>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>To develop our topic model, we used the Twitter data extracted using the Twitter API and <a href="https://cran.r-project.org/web/packages/rtweet/rtweet.pdf">rtweet</a> package in R. This post will not cover Twitter API setup and data extraction details, but you can find some useful references in the <code>reference</code> section of this document.<br></p>
+<p>Since our goal with this analysis is to understand each tweet content, there is no need to consider posts engagement. For instance, if we consider engagement in a case where some specific tweet is heavily re-tweeted in the network without any comment added, this tweet would be repeated in our data several times, but in the end the post content is the same and we would end up with the same identified topic for that case. That’s why it is not necessary to consider the engagement in this case, in fact it would only increase our processing time.</p>
+<p>Below, you can see a sample from the data (scmp_full_filtered) that it is going to be used in this analysis:<br />
+- <em>user_id:</em> Unique user identifier generated by twitter <br> - <em>status_id:</em> This code identifies each single tweet in data <br> - <em>created_at:</em> Tweet post date <br> - <em>text:</em> Tweet text <br> - <em>source:</em> Identifies from which source the tweet was posted <br> - <em>location:</em> User location <br> - <em>extraction:</em> Identifies our extraction (December 20th, December 25th and January 1st) <br> - <em>week:</em> Derived from the variable “created_at”, it identifies the week of the year of each post. <br></p>
+<pre class="r"><code>library(tidyverse)
+library(dplyr)
+
+glimpse(scmp_full_filtered)</code></pre>
+<pre><code>## Observations: 25,372
+## Variables: 9
+## $ user_id     &lt;fct&gt; x23922797, x23922797, x23922797, x23922797, x23922...
+## $ status_id   &lt;fct&gt; x1073696636117897219, x1073694119854252033, x10734...
+## $ created_at  &lt;dttm&gt; 2018-12-14 21:50:00, 2018-12-14 21:40:00, 2018-12...
+## $ text        &lt;fct&gt; &quot;Chinese hackers reportedly breached US Navy contr...
+## $ screen_name &lt;fct&gt; SCMPNews, SCMPNews, SCMPNews, SCMPNews, SCMPNews, ...
+## $ source      &lt;fct&gt; Buffer, Buffer, Buffer, Buffer, Buffer, Buffer, Bu...
+## $ location    &lt;fct&gt; Hong Kong, Hong Kong, Hong Kong, Hong Kong, Hong K...
+## $ extraction  &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ week        &lt;chr&gt; &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;49&quot;, &quot;4...</code></pre>
+</div>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
+<p>Before diving into the modeling part, I’m going to show some basic analysis to further understanding about the data.</p>
+<div id="basic-analysis" class="section level2">
+<h2>Basic Analysis</h2>
+<p>In this analysis we want to show some users characteristics related to the total number of tweets, location, activity per day of week and posting mode.<br> The following visualization uses “ggplot2” and “ggpubr” packages. Besides that, the “theme_SCMP” was created to standardize the graphs easily.<br></p>
+<pre class="r"><code>library(ggplot2)
+library(ggpubr)
+
+#top users
+user &lt;- scmp_full_filtered %&gt;% mutate(SCMP = case_when(user_id == &quot;x23922797&quot; ~ &quot;Top1&quot;
+                                            ,user_id == &quot;x753571509080174592&quot; ~ &quot;Top2&quot;
+                                            ,user_id == &quot;x2181603019&quot; ~ &quot;Top3&quot;
+                                            ,user_id == &quot;x796377107148447744&quot; ~ &quot;Top4&quot;
+                                            ,user_id == &quot;x754430965737488384&quot; ~&quot;Top5&quot;
+                                            ,user_id %in% c(&quot;x1040992571219038208&quot; 
+                                                            ,&quot;x347568180&quot; 
+                                                            ,&quot;x39221283&quot; 
+                                                            ,&quot;x1015999919566434304&quot; 
+                                                            ,&quot;x822305327072710658&quot;) ~ &quot;Top6-10&quot;
+                                            ,user_id != c(&quot;x23922797&quot; 
+                                                          ,&quot;x753571509080174592&quot;
+                                                          ,&quot;x2181603019&quot;
+                                                          ,&quot;x796377107148447744&quot; 
+                                                          ,&quot;x754430965737488384&quot;
+                                                          ,&quot;x1040992571219038208&quot; 
+                                                          ,&quot;x347568180&quot; 
+                                                          ,&quot;x39221283&quot; 
+                                                          ,&quot;x1015999919566434304&quot; 
+                                                          ,&quot;x822305327072710658&quot;) ~ &quot;Others&quot;)
+                                     )
+user &lt;- user %&gt;% group_by(SCMP) %&gt;% summarise(number_tweets = n())
+user_plot &lt;- ggplot(user, aes(x = factor(SCMP), y = number_tweets)) +
+            geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;, fill=&quot;darkgoldenrod1&quot;) +
+            labs(title = &#39;Tweets SCMP vs. Others&#39;, x = &#39;&#39;, y = &quot;Number of Tweets&quot;) + 
+            theme_SCMP
+user_plot &lt;- user_plot + theme(plot.title = element_text(size = 11, hjust = 0.5))
+
+
+#day of week
+week &lt;- scmp_full %&gt;% mutate(day_week = format(created_at,&#39;%w&#39;))
+week &lt;- week %&gt;% group_by(day_week) %&gt;% summarise(n = n())
+week$day_week &lt;- as.numeric(week$day_week)
+week &lt;- week %&gt;% mutate(weekday = case_when (day_week == 0 ~ &quot;7.Sun&quot;
+                                    ,day_week == 1 ~ &quot;1.Mon&quot;
+                                    ,day_week == 2 ~ &quot;2.Tue&quot;
+                                    ,day_week == 3 ~ &quot;3.Wed&quot;
+                                    ,day_week == 4 ~ &quot;4.Thu&quot;
+                                    ,day_week == 5 ~ &quot;5.Fri&quot;
+                                    ,day_week == 6 ~ &quot;6.Sat&quot;)
+                        ,total = case_when(day_week == 0 ~ (n/3)
+                                    ,between(day_week,1,2) ~ (n/4)
+                                    ,between(day_week,3,6) ~ (n/3)))
+weekday_plot &lt;- ggplot(week, aes(x = factor(weekday), y = total)) +
+            geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;, fill=&quot;darkgoldenrod1&quot;) +
+            labs(title = &#39;Average Tweets per day&#39;, x = &#39;&#39;, y = &quot;Avg tweets per day&quot;) + 
+            theme_SCMP
+weekday_plot &lt;- weekday_plot + theme(plot.title = element_text(size = 11, hjust = 0.5))
+
+
+#location
+location &lt;- scmp_full %&gt;% filter(location != &quot;&quot;)
+location_plot &lt;- location %&gt;%
+      count(location, sort = TRUE) %&gt;%
+      mutate(location = reorder(location, n)) %&gt;%
+      top_n(10) %&gt;%
+      ggplot(aes(x = location, y = n)) +
+      geom_col(fill = &quot;darkgoldenrod1&quot;) +
+      coord_flip() + 
+      labs(x = &quot;&quot;, y = &quot;number of tweets&quot;, title = &quot;Top 10 locations&quot;) +
+      theme_SCMP
+location_plot &lt;- location_plot + theme(plot.title = element_text(size = 11, hjust = 0.5))
+
+
+#source
+source &lt;- scmp_full %&gt;% mutate(source2 = case_when(source == &quot;Twitter Web Client&quot; ~ &quot;1.Web&quot;
+                                                   ,source == &quot;Twitter for iPhone&quot; ~ &quot;2.iPhone&quot;
+                                                   ,source == &quot;Twitter for Android&quot; ~ &quot;3.Android&quot;
+                                                   ,source == &quot;Buffer&quot; ~ &quot;4.Buffer&quot;
+                                                   ,source == &quot;Twitter Lite&quot; ~ &quot;5.Lite&quot;
+                                                   ,source != c(&quot;Twitter Web Client&quot; 
+                                                                ,&quot;Twitter for iPhone&quot;
+                                                                ,&quot;Twitter for Android&quot;
+                                                                ,&quot;Buffer&quot;
+                                                                ,&quot;Twitter Lite&quot;) ~ &quot;6.Outros&quot;))
+source &lt;- source %&gt;% group_by(source2) %&gt;% summarise(total = n())
+source_plot &lt;- ggplot(source, aes(x = factor(source2), y = total)) +
+            geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;, fill=&quot;darkgoldenrod1&quot;) +
+            labs(title = &#39;Tweets per source&#39;, x = &#39;&#39;, y = &quot;Total&quot;) + 
+            theme_SCMP
+source_plot &lt;- source_plot + theme(plot.title = element_text(size = 11, hjust = 0.5))
+
+
+#plot
+ggarrange(user_plot, weekday_plot, location_plot, source_plot, ncol = 2, nrow = 2)</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Tweets SCMP vs. Others: As expected, the top 1 user is South China Morning Post profile (<span class="citation">@SCMPnews</span>)! As we saw in the first article, SCMP has a high centrality in this network and seems natural that it would be the top 1 in number of tweets. Their profile itself is responsible for 11.44% of all tweets in this data and when summed up to the following top 9 users, it reaches 4.026 tweets or 15.8% of total tweets. In fact, their behavior is very different from the other users, but still have a considerable number of tweets from the remainder users.<br></li>
+<li>Average tweets per day: This graph shows that in this network, the users tend to post more during the week days than during the weekends. <br></li>
+<li>Top 10 Locations: Hong Kong is by far the most popular location in this network, which makes sense since SCMP is a local newspaper. At the same time, there are locations from different parts of the world (not only Asia) in the top 10 list, and as said in the first article, SCMP has developed a strategy to increase its brand presence worldwide in recent years, so it seems that they are doing a great job on it. <br></li>
+<li>Tweets Source: In this graph we wanted to understand a little bit about the customer usage habits and we can see that Web followed by the app versions are the principal channels used for tweeting. <br></li>
+</ul>
+</div>
+<div id="basic-text-analysis" class="section level2">
+<h2>Basic Text analysis</h2>
+<p>Starting from this session, I’m going to tackle the content analysis and the first step to perform this task it is text cleanning, as follows:</p>
+<pre class="r"><code>library(tidytext)
+
+scmp_full_filtered &lt;- scmp_full_filtered %&gt;% arrange(created_at)
+words &lt;- scmp_full_filtered %&gt;% select(status_id, text, created_at)
+
+#remove site addresses
+words$stripped_text &lt;- gsub(&#39;http.*&#39;,&#39;&#39;,  words$text)
+words$stripped_text &lt;- gsub(&#39;https.*&#39;,&#39;&#39;, words$stripped_text)
+#remove any thing that is not a commun letter or ponctuation
+words$stripped_text &lt;- gsub(&#39;[^\x20-\x7E]&#39;, &#39;&#39;, words$stripped_text)
+words$stripped_text &lt;- gsub(&#39;youre&#39;, &#39;&#39;, words$stripped_text)
+words$stripped_text &lt;- gsub(&#39;[[:digit:]]&#39;, &#39;&#39;, words$stripped_text)</code></pre>
+<p>The expression <code>[^\x20-\x7E]</code> stands for removing all characters besides commun letter or ponctuation. If you take a look on the <a href="http://www.asciitable.com/">ASCII table</a>, this line code removes any character that doesn’t lie between 0x20 and 0X7E.<br> I also decided to remove “youre” because it was appearing several times in data and it was interfering on the interpretability in the following steps. Next, we need to remove all the ‘stop words’ and separate each word of our cleaned text for performing the following analysis.</p>
+<pre class="r"><code>words2 &lt;- words %&gt;%
+  unnest_tokens(word, stripped_text) %&gt;%
+  anti_join(stop_words)
+
+head(words2)</code></pre>
+<pre><code>##              status_id
+## 1 x1071968192442945536
+## 2 x1071968192442945536
+## 3 x1071968192442945536
+## 4 x1071968192442945536
+## 5 x1071968192442945536
+## 6 x1071968192442945536
+##                                                                                                                                                                                                                   text
+## 1 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+## 2 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+## 3 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+## 4 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+## 5 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+## 6 Need a bake-ahead dessert for your #holidayfeast? Try this #delicious and festive (and #supereasy) #eggnog tart with a gingersnap crust. https://t.co/UbQnbvOpBe via @SCMPNews https://t.co/UbQnbvOpBe via @SCMPNews
+##            created_at         word
+## 1 2018-12-10 03:21:00         bake
+## 2 2018-12-10 03:21:00        ahead
+## 3 2018-12-10 03:21:00      dessert
+## 4 2018-12-10 03:21:00 holidayfeast
+## 5 2018-12-10 03:21:00    delicious
+## 6 2018-12-10 03:21:00      festive</code></pre>
+<div id="basic-cloud" class="section level3">
+<h3>Basic cloud</h3>
+<p>Since the most popular visualization for text is the word cloud, coming next you can find some examples applied to SCMP data:</p>
+<pre class="r"><code>library(wordcloud)
+
+words2 &lt;- words2 %&gt;% 
+      filter(word != &quot;scmpnews&quot;)
+
+words2 %&gt;%
+      count(word) %&gt;%
+      with(wordcloud(word, n, max.words = 120, rot.per = 0.4, scale=c(4,0.6),
+      colors=brewer.pal(7, &quot;Set1&quot;)))</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>In this fist visualization we already see some words like “China”, “Trade”, “War”, “Hawaei”, “American”, “Xi” (that stands for Xi Jinping) pop ups. During the period of our analysis there were many news related to a possible Trade War between China and USA, we will see it with more details later on.</p>
+</div>
+<div id="bigram" class="section level3">
+<h3>Bigram</h3>
+<p>Another approach for basic text analysis is considering the words in pairs instead of considering each of them separately: <br></p>
+<pre class="r"><code>tweet_bigram &lt;- words %&gt;%
+      unnest_tokens(bigram, stripped_text, token = &quot;ngrams&quot;, n = 2)
+
+bigrams_separated &lt;- tweet_bigram %&gt;%
+      separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;)
+
+bigrams_filtered &lt;- bigrams_separated %&gt;%
+      filter(!word1 %in% stop_words$word) %&gt;%
+      filter(!word2 %in% stop_words$word)
+
+# new bigram counts:
+bigram_counts &lt;- bigrams_filtered %&gt;% 
+      count(word1, word2, sort = TRUE)
+
+bigrams_united &lt;- bigrams_filtered %&gt;%
+      unite(bigram, word1, word2, sep = &quot; &quot;)
+
+bigrams_united %&gt;%
+      count(bigram, sort = TRUE) %&gt;%
+      filter(n &gt; 300) %&gt;%
+      mutate(bigram = reorder(bigram, n)) %&gt;%
+      ggplot(aes(bigram, n)) +
+      geom_col(fill = &quot;midnightblue&quot;) +
+      xlab(NULL) +
+      coord_flip() + 
+      labs(title = &#39;Top Words Pairs&#39;, x = &#39; &#39;, y=&quot;Total&quot;) + 
+      theme_SCMP</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /> <br> To a better understanding about this analysis let me give a little bit of context. During the period of the data extraction there were some hot topics highly published in all kinds of media, like: possible Trade War between China and USA, Arrestment of a Christians group in China and the Huawei’s CFO arrestment in Canada. Interestingly words related to those events appear as top pair of words in our analysis. Following, some news headlines from that period which gives more details about the context:<br> <br></p>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-9"></span>
+<img src="img/Trade_War.png" alt="US-China Trade War - Source: [SCMP](https://www.scmp.com/economy/china-economy/article/2180149/us-china-trade-war-dominates-scmps-top-10-economy-stories-2018)"  />
+<p class="caption">
+Figure 1: US-China Trade War - Source: <a href="https://www.scmp.com/economy/china-economy/article/2180149/us-china-trade-war-dominates-scmps-top-10-economy-stories-2018">SCMP</a>
+</p>
+</div>
+<p><br> <br></p>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-10"></span>
+<img src="img/Christians_group.png" alt="Christians arrestment - Source: [SCMP](https://www.scmp.com/news/china/politics/article/2177263/100-snatched-china-church-raids-overnight)"  />
+<p class="caption">
+Figure 2: Christians arrestment - Source: <a href="https://www.scmp.com/news/china/politics/article/2177263/100-snatched-china-church-raids-overnight">SCMP</a>
+</p>
+</div>
+<p><br> <br></p>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-11"></span>
+<img src="img/huawei.png" alt="Huawei - Source: [SCMP](https://www.scmp.com/comment/insight-opinion/united-states/article/2179520/how-arrest-huaweis-meng-wanzhou-may-mark-start)"  />
+<p class="caption">
+Figure 3: Huawei - Source: <a href="https://www.scmp.com/comment/insight-opinion/united-states/article/2179520/how-arrest-huaweis-meng-wanzhou-may-mark-start">SCMP</a>
+</p>
+</div>
+<p><br> <br></p>
+<p>Another useful way to visualize the word pairs is using graphs. Particularly, I love this visualization because it shows the relationship with more than one word-pair at the same time in an intuitive and straightforward way. Besides that, the <code>visNetwork</code> package helps turning it into a super cool and dynamic visualization!<br></p>
+<pre class="r"><code>library(visNetwork)
+library(igraph)
+library(ggraph)
+
+bigram_graph &lt;- bigram_counts %&gt;%
+  filter(n &gt; 150) %&gt;%
+  graph_from_data_frame
+
+edges &lt;- as_data_frame(bigram_graph, what=&quot;edges&quot;)
+names(edges)[names(edges) == &#39;from&#39;] &lt;- &#39;from_aux&#39;
+names(edges)[names(edges) == &#39;to&#39;] &lt;- &#39;to_aux&#39;
+
+nodes &lt;- as_data_frame(bigram_graph, what=&quot;vertices&quot;)
+nodes2 &lt;- cbind(id=as.numeric(factor(nodes$name, levels = nodes$name)), nodes) 
+
+edges2 &lt;- left_join(edges,nodes2,by=c(&quot;from_aux&quot;=&quot;name&quot;))
+names(edges2)[names(edges2) == &#39;id&#39;] &lt;- &#39;from&#39;
+edges2 &lt;- left_join(edges2,nodes2,by=c(&quot;to_aux&quot;=&quot;name&quot;))
+names(edges2)[names(edges2) == &#39;id&#39;] &lt;- &#39;to&#39;
+
+
+edges2$width &lt;- 5 # line width
+nodes2$shape  &lt;- &quot;dot&quot;  
+nodes2$label  &lt;- nodes2$name # Node label
+nodes2$font &lt;- &#39;40px arial blue&#39;
+nodes2$color &lt;- &#39;#ebb400&#39;
+nodes2$borderWidth &lt;- 1 # Node border width
+edges2$color &lt;- &quot;gray&quot;    # line color  
+edges2$arrows &lt;- &quot;from&quot; # arrows: &#39;from&#39;, &#39;to&#39;, or &#39;middle&#39;
+
+visNetwork(nodes2, edges2, width=&quot;100%&quot;, height=&quot;600px&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:600px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"nodes":{"id":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76],"name":["trade","hong","america","american","globalist","helping","revival","treasonous","vast","christians","huawei","overnight","underground","meng","economic","stop","manufacturing","producing","chinese","trump's","south","animalsaus","ban_live_export","banlivexport_il","billshortenmp","chinaplusnews","fitzhunter","tanya_plibersek","wtopublications","scmpnews","pdchina","suzannecass","concentration","ambulance","passengers","public","news","putting","outlet","government","politico","xhnews","cfo","china","iamsuey","ianjamesyoung","war","kong","undo","casualties","pockets","xi","policies","wealth","snatched","raids","church","wanzhou","data","hub","toughness","wto","chinadaily","camps","rushing","stepped","bus","muslims","reporting","article","propaganda","official","media","kongs","interview","sea"],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"],"label":["trade","hong","america","american","globalist","helping","revival","treasonous","vast","christians","huawei","overnight","underground","meng","economic","stop","manufacturing","producing","chinese","trump's","south","animalsaus","ban_live_export","banlivexport_il","billshortenmp","chinaplusnews","fitzhunter","tanya_plibersek","wtopublications","scmpnews","pdchina","suzannecass","concentration","ambulance","passengers","public","news","putting","outlet","government","politico","xhnews","cfo","china","iamsuey","ianjamesyoung","war","kong","undo","casualties","pockets","xi","policies","wealth","snatched","raids","church","wanzhou","data","hub","toughness","wto","chinadaily","camps","rushing","stepped","bus","muslims","reporting","article","propaganda","official","media","kongs","interview","sea"],"font":["40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue","40px arial blue"],"color":["#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400","#ebb400"],"borderWidth":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]},"edges":{"from_aux":["trade","hong","america","american","globalist","helping","revival","trade","treasonous","vast","christians","huawei","overnight","underground","meng","economic","stop","manufacturing","producing","chinese","trump's","trade","south","animalsaus","ban_live_export","banlivexport_il","billshortenmp","chinaplusnews","fitzhunter","tanya_plibersek","wtopublications","scmpnews","pdchina","suzannecass","concentration","ambulance","passengers","public","news","putting","outlet","scmpnews","chinese","government","american","hong","politico","xhnews","cfo","china","iamsuey","ianjamesyoung"],"to_aux":["war","kong","undo","casualties","pockets","america","xi","revival","policies","wealth","snatched","cfo","raids","church","wanzhou","data","producing","hub","economic","government","trade","toughness","china","banlivexport_il","animalsaus","fitzhunter","tanya_plibersek","wtopublications","billshortenmp","chinaplusnews","wto","pdchina","chinadaily","ban_live_export","camps","rushing","stepped","bus","outlet","muslims","reporting","article","propaganda","official","media","kongs","article","interview","meng","sea","suzannecass","scmpnews"],"n":[1098,1045,656,656,656,656,656,656,656,656,373,369,361,354,331,300,296,287,287,276,261,258,242,222,222,222,222,222,222,222,222,221,220,217,208,202,202,202,189,188,186,186,182,181,178,177,177,177,174,172,167,157],"from":[1,2,3,4,5,6,7,1,8,9,10,11,12,13,14,15,16,17,18,19,20,1,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,30,19,40,4,2,41,42,43,44,45,46],"to":[47,48,49,50,51,3,52,7,53,54,55,43,56,57,58,59,18,60,15,40,1,61,44,24,22,27,28,29,25,26,62,31,63,23,64,65,66,67,39,68,69,70,71,72,73,74,70,75,14,76,32,30],"width":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],"color":["gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray","gray"],"arrows":["from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from","from"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":"100%","height":"600px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<p>This graph starts to reveal some basic word groups that seems to be related with some specific topics. For example, the group “xi-revival-trade-war-trump’s-toughness” seems to be related to the news about “USA and China Trade War” already mentioned previously in this document. Furthermore, the big group that includes words like “suzannecass-ban_live_export-banliveexport” seems to be related news about protests against animal live exportation (after an ship accident in this period). <br></p>
+</div>
+<div id="trend-topics" class="section level3">
+<h3>Trend topics</h3>
+<p>In our previous article, we saw that on the 18th of December we had a peak in the number of tweets. So the following analysis aims to understand if it was any unusual behaviour that day:<br></p>
+<pre class="r"><code>day18 &lt;- words2 %&gt;% filter(format(created_at,&#39;%Y-%m-%d&#39;) == &quot;2018-12-18&quot;)
+
+day18 %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  filter(n &gt; 120) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(word, n)) +
+  geom_col(fill = &quot;midnightblue&quot;) +
+  xlab(NULL) +
+  coord_flip() + 
+  labs(title = &#39;Top Words - 18th of December&#39;, x = &#39; &#39;, y=&quot;Total&quot;) + 
+  theme_SCMP</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>day18 &lt;- day18 %&gt;% filter(word != &quot;scmpnews&quot;)
+day18 %&gt;%
+      count(word) %&gt;%
+      with(wordcloud(word, n, max.words = 80, rot.per = 0.4, scale=c(4,0.6),
+      colors=brewer.pal(8, &quot;Dark2&quot;)))</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-13-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Definitely, we can see that there were some news related to the US and China Trade War that generated more activity and comments in the network at that day. Note that was just shown above, in the news headline example, that the episodes related to this topic dominated the top 10 list of economic stories in 2018 so, we can conclude that this was indeed an important topic and therefore raised users interest in the network.</p>
+</div>
+</div>
+</div>
+<div id="topic-modeling" class="section level1">
+<h1>Topic Modeling</h1>
+<div id="data-treatment" class="section level2">
+<h2>Data treatment</h2>
+<p>Since we don´t know exactly what topics might exist in the data and we don’t have any variables with this information for training a supervised learning model, we decided to use a clustering technique to group the posts with similar content and then classify it according to its characteristics.<br> That being said, the data for this task needs to be prepared. First of all, it is necessary to count each word frequency in data and then transform it into a Document Term Matrix, as follows:</p>
+<pre class="r"><code>word_counts &lt;- words2 %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  mutate(aux= 1)
+
+word_counts2 &lt;- word_counts %&gt;% 
+      filter(word != &quot;scmpnews&quot;) %&gt;%
+      cast_dtm(aux, word, n) </code></pre>
+</div>
+<div id="model" class="section level2">
+<h2>Model</h2>
+<p>For our topic modeling we are going to use the algorithm “Latent Dirichet Allocation” which is a popular and simple approach for this kind of problem. According to Silge et all. (2010) this algorithm “treats each document as a mixture of topics and each topic a mixture of words.” In our study, we decided to follow the simplest approach and consider the whole dataset as one unique document.</p>
+<pre class="r"><code>library(topicmodels)
+
+word_counts3 &lt;- LDA(word_counts2, k = 6, control = list(seed = 1234))
+word_counts4 &lt;- tidy(word_counts3, matrix = &quot;beta&quot;)
+word_counts5 &lt;- word_counts4 %&gt;% group_by(term) %&gt;% summarise(beta = max(beta))
+word_counts6 &lt;- left_join(word_counts5, word_counts4, by=c(&quot;term&quot;=&quot;term&quot;, &quot;beta&quot;=&quot;beta&quot;))
+head(word_counts4)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   topic term     beta
+##   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
+## 1     1 china 0.0468 
+## 2     2 china 0.00179
+## 3     3 china 0.00183
+## 4     4 china 0.0205 
+## 5     5 china 0.00189
+## 6     6 china 0.0520</code></pre>
+<p>An interesting point about topic models algorithms is that it allows some overlaps within the identified topics, which means that for each work, it is possible to get more than one topic and each of them with different probabilities. The table above illustrates exactly this concept for the word “China”. and, as you can see, it has different probabilities for each topic. Note that, the highest one is correspondent to Topic 6. Later on we are going to show that this makes a lot of sense, since we identified that this topic concentrate news related to “Mainland China”.</p>
+<p>The following visualization shows the top 10 (in terms of Beta) for each of the topics:</p>
+<pre class="r"><code>top_terms &lt;- word_counts6 %&gt;%
+  group_by(topic) %&gt;%
+  arrange(topic, -beta) %&gt;%
+  top_n(10, beta) %&gt;%
+  ungroup() %&gt;%
+  arrange(topic, -beta)
+
+top_terms %&gt;% 
+      mutate(term = reorder(term, beta)) %&gt;%
+      ggplot(aes(term, beta, fill = factor(topic))) +
+      geom_col(show.legend = FALSE) +
+      facet_wrap(~ topic, scales = &quot;free&quot;) +
+      coord_flip()</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="results" class="section level2">
+<h2>Results:</h2>
+<p>To come up with a unique topic per tweet, we considered the topic with the highest overall beta as follows:</p>
+<pre class="r"><code>library(tm)
+
+#Defining topic to each status_id
+scmp_words_status &lt;- left_join(words2, word_counts6, by=c(&quot;word&quot;=&quot;term&quot;))
+scmp_words_status &lt;- scmp_words_status %&gt;% group_by(status_id, topic) %&gt;% summarise(total = n())
+scmp_words_status &lt;- scmp_words_status %&gt;% arrange(status_id, desc(total))
+scmp_words_status &lt;- subset(scmp_words_status, !duplicated(scmp_words_status[,&quot;status_id&quot;]))
+
+#adding topic to the original data
+text &lt;- scmp_full_filtered %&gt;% select(status_id, text)
+scmp_words_status2 &lt;- left_join(text,scmp_words_status, by=c(&quot;status_id&quot;=&quot;status_id&quot;))
+scmp_words_status2 &lt;- scmp_words_status2 %&gt;% filter(!is.na(topic))
+
+topic_plot &lt;- scmp_words_status2 %&gt;% group_by(topic) %&gt;% summarise(total = n())
+topic_plot2 &lt;- ggplot(topic_plot, aes(x = factor(topic), y = total)) +
+            geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;, fill=&quot;midnightblue&quot;) +
+            labs(title = &#39;Total tweets per topic&#39;, x = &#39;&#39;, y = &quot;total&quot;) + 
+            theme_SCMP
+topic_plot2 + theme(plot.title = element_text(size = 11, hjust = 0.5))</code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>The final classification obtained a roughly balanced distribution of number of tweets per topic. The one with fewer classified posts is topic 5 with only 2707 posts (10.7% of total tweets).<br></p>
+<p>After all we can now show our final visualization with more details about the content obtained for each of the topics:<br></p>
+<pre class="r"><code>#we will need to clean the text again, also removing digits and ponctuations to make the visualization cleaner
+scmp_words_status2$stripped_text &lt;- tolower(scmp_words_status2$text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;http.*&#39;,&#39;&#39;,  scmp_words_status2$stripped_text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;[^\x20-\x7E]&#39;, &#39;&#39;, scmp_words_status2$stripped_text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;[[:punct:]]&#39;, &#39;&#39;, scmp_words_status2$stripped_text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;[[:digit:]]&#39;, &#39;&#39;, scmp_words_status2$stripped_text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;youre&#39;, &#39;&#39;, scmp_words_status2$stripped_text)
+scmp_words_status2$stripped_text &lt;- gsub(&#39;rt&#39;, &#39;&#39;, scmp_words_status2$stripped_text)
+
+scmp_words_status2 &lt;- scmp_words_status2 %&gt;% select(status_id, stripped_text, topic)
+
+
+topic1 &lt;- scmp_words_status2 %&gt;% filter(topic==1) %&gt;% select(stripped_text)
+topic1a = paste(topic1$stripped_text, collapse=&quot; &quot;)
+
+topic2 &lt;- scmp_words_status2 %&gt;% filter(topic==2) %&gt;% select(stripped_text)
+topic2a = paste(topic2$stripped_text, collapse=&quot; &quot;)
+
+topic3 &lt;- scmp_words_status2 %&gt;% filter(topic==3) %&gt;% select(stripped_text)
+topic3a = paste(topic3$stripped_text, collapse=&quot; &quot;)
+
+topic4 &lt;- scmp_words_status2 %&gt;% filter(topic==4) %&gt;% select(stripped_text)
+topic4a = paste(topic4$stripped_text, collapse=&quot; &quot;)
+
+topic5 &lt;- scmp_words_status2 %&gt;% filter(topic==5) %&gt;% select(stripped_text)
+topic5a = paste(topic5$stripped_text, collapse=&quot; &quot;)
+
+topic6 &lt;- scmp_words_status2 %&gt;% filter(topic==6) %&gt;% select(stripped_text)
+topic6a = paste(topic6$stripped_text, collapse=&quot; &quot;)
+
+
+all = c(topic1a, topic2a, topic3a, topic4a, topic5a, topic6a)
+all = removeWords(all, c(stopwords(&quot;english&quot;)))
+
+
+corpus = Corpus(VectorSource(all))
+tdm = TermDocumentMatrix(corpus)
+tdm = as.matrix(tdm)
+
+# add column names
+colnames(tdm) = c(&quot;HK News&quot;, &quot;International&quot;, &quot;USA and China&quot;, &quot;Business&quot;, &quot;Sports&quot;, &quot;Mainland China&quot;)
+
+comparison.cloud(tdm, random.order=FALSE,scale=c(4,0.4), 
+colors = c(&quot;midnightblue&quot;, &quot;darkgoldenrod1&quot;, &quot;goldenrod4&quot;, &quot;dodgerblue3&quot;, &quot;gray44&quot;,  &quot;darkorange3&quot;),
+title.size=0.8, max.words=5000) </code></pre>
+<p><img src="/post/2019-05-03-topic-model_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Topic 1 “Hong Kong News”: Daily news about Hong Kong. <br></li>
+<li>Topic 2 “International”: News related to the international scenario. With a particular reference to the words “Canadian”, “Huawei” that are related to a hot topic at that time about the Huawei’s CFO arrestment in Canada. <br></li>
+<li>Topic 3 “USA and China”: The principal content is news related to the USA and China, especially the ones related to the issue “Trade War”. <br></li>
+<li>Topic 4 “Business”: News related to business in general. In the cloud above it is possible to identify many words like “Christmas”, “Jack Ma”, “founder”, “employees”, “working” which are usually related to business. <br></li>
+<li>Topic 5 “Sports”: News related to sports, pointing out words like “rugby”, “Olympics”, “Tokyo”. It is curious to see “whaling” in this topic, but the reason is that there were some protests against the new Japanese policy regarding whaling and many athletes were considering to boycott the Olympic games in Japan. <br></li>
+</ul>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-19"></span>
+<img src="img/whale.png" alt="Topic 5 news example - Source [SCMP](https://www.scmp.com/sport/rugby/article/2179912/rugby-world-cup-boycott-japans-whaling-return-sparks-rumblings-protests)"  />
+<p class="caption">
+Figure 4: Topic 5 news example - Source <a href="https://www.scmp.com/sport/rugby/article/2179912/rugby-world-cup-boycott-japans-whaling-return-sparks-rumblings-protests">SCMP</a>
+</p>
+</div>
+<ul>
+<li>Topic 6 “Mainland China”: General news about mainland China. <br></li>
+</ul>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>Using this simple topic modeling approach, it was possible to identify 6 different topics in data and remarkably most of them are part of the SCMP classification in its website. If you check their website, you will see that they organize their news into 8 different categories: “Hong Kong”, “China”, “Asia”, “World”, “Business”, “Economy”, “Tech” and “Sports”. We were able to identify successfully topics related to “Hong Kong”, “China” and “Sports”, “Business” seems to be mixed with news related to “Tech” and finally “International” seems to be a mixture of “World” and “Asia” in our study.<br> Surprisingly, we were able to identify one exclusive cluster for “US and China Trade War” and since it dominated the top 10 economy stories in 2018, this separation seems to make sense due to the extraction period of our data. <br> One recommendation for further improvement in this model is increase the data size, by extracting data for a longer period. With this done, I expect that the identified topics will converge to the classification which SCMP uses in their website.<br></p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<ul>
+<li>Seting up Twitter API:<br>
+<ul>
+<li><a href="https://towardsdatascience.com/access-data-from-twitter-api-using-r-and-or-python-b8ac342d3efe" class="uri">https://towardsdatascience.com/access-data-from-twitter-api-using-r-and-or-python-b8ac342d3efe</a> <br></li>
+<li><a href="https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/" class="uri">https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/</a> <br></li>
+</ul></li>
+<li>ASCII table: <a href="http://www.asciitable.com/" class="uri">http://www.asciitable.com/</a></li>
+<li>Silge, J. and Robinson, D., 2010. Text mining with R <a href="https://www.tidytextmining.com/" class="uri">https://www.tidytextmining.com/</a></li>
+<li>Gaphs visualization <a href="http://kateto.net/network-visualization" class="uri">http://kateto.net/network-visualization</a></li>
+</ul>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/#r/">#R</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/#topicmodel/">#topicmodel</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/#lda/">#lda</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/#nlp/">#nlp</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/social-media-project/" data-tooltip="Social Media Project">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/introductory-tutorial-on-rmarkdown/" data-tooltip="Introductory Tutorial on Rmarkdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/05/topic-model/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/topic-model/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Gabriela Mourao. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/social-media-project/" data-tooltip="Social Media Project">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/introductory-tutorial-on-rmarkdown/" data-tooltip="Introductory Tutorial on Rmarkdown">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/05/topic-model/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/05/topic-model/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2019%2F05%2Ftopic-model%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F05%2Ftopic-model%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://res.cloudinary.com/gcmourao/image/upload/c_fill,ar_1:1,g_auto,r_max,bo_5px_solid_red,b_rgb:262c35/v1550135931/profile.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Gabriela Mourao</h4>
+    
+      <div id="about-card-bio">Economist &amp; Data Scientist, passionate about Analytics and Innovation.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        MsC in Business Analytics @HKU
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Hong Kong
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/social-media-project/">
+                <h3 class="media-heading">Social Media Project</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">This article was developed based on the final project for a Social Media Analytics Course in the University of Hong Kong’s Master of Science in Business Analytics programme. The project is a result of a team effort and everybody worked hard to deliver all analysis that are going to be presented in this document. I would like to say thank you to all my team mates: August Hjorth, Maria Raquel Gomez Lopez, Martina de Luca, Xiaoyen Chen and Mawuli Adjei.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/topic-model/">
+                <h3 class="media-heading">Topic Model</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/02/introductory-tutorial-on-rmarkdown/">
+                <h3 class="media-heading">Introductory Tutorial on Rmarkdown</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Rmarkdown is a super useful package in R! It enables the creation of reports in different formats like word, pdf, html, and others; all of them very neat and professional. I also like to use it in small projects, since it is possible to comment all steps in a very organized way, besides that you can even develop your own theme and the results are awesome!
+I decided to make this tutorial to help those who are new to Rmarkdown, making it very straightforward to the features that I use most, so one can start using all the awesome options of this package that makes our lives much easier right away!</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         3 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://res.cloudinary.com/gcmourao/image/upload/e_art:incognito/v1550130821/cover4.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

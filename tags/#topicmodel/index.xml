@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>#Topicmodel on Gabriela Mourao</title>
+    <link>/tags/#topicmodel/</link>
+    <description>Recent content in #Topicmodel on Gabriela Mourao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/#topicmodel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Topic Model</title>
+      <link>/2019/05/topic-model/</link>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/topic-model/</guid>
+      <description>IntroductionThis is the second article about South China Morning Post (SCMP) Social Network Analysis, and in this post it is going to be cover the step by step of our approach to the Topic Modeling, including data treatment, basic analysis and visualizations and the model development. Hope you find this article useful and please let me know your feedbacks!
+DataTo develop our topic model, we used the Twitter data extracted using the Twitter API and rtweet package in R.</description>
+    </item>
+    
+  </channel>
+</rss>
