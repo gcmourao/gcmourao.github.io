@@ -142,7 +142,7 @@ However, what we could see from its graph is that the power of this account is s
 According to Borgatti et al. (2013)^[Borgatti, S., Everett, M., Johnson, J. 2013. Analyzing Social Networks. 1st ed., SAGE], betweenness centrality "is a measure of how often a given node falls along the shortest path between two other nodes". So, the high value obtained for SCMP node means that its profile is "in the middle" of most conversations (i.e edges). That's why it's difficult to find sub-communities in this network, once most of the relationships are directly related to SCMP.
 After running the modularity clustering available in Gephi, we were able to find 21 different communities and the most important ones are highlighted in dark blue, yellow, light blue, red, black, purple and all the other (small) ones are in gray. As one can notice, comparing to the giant component in dark blue where SCMP node is in, none of the others sub-networks have high relevance.   
 ```{r, out.width='70%', fig.align='center', echo = FALSE}
-knitr::include_graphics('img/overview_no_label2.png')
+knitr::include_graphics('img/Overview_no_label2.png')
 ```
 
 # The Alternative Approach
